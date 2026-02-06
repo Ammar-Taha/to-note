@@ -1,13 +1,11 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useMemo, useEffect } from 'react'
 import Image from 'next/image'
-import { Separator } from '@/components/ui/separator'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Button } from '@/components/ui/button'
 import { Logo } from '@/components/layout/Logo'
 import { Navigation } from '@/components/sidebar/Navigation'
-import { TagsPanel } from '@/components/sidebar/TagsPanel'
 import { SearchInput } from '@/components/ui/SearchInput'
 import { NoteListItem } from '@/components/notes/NoteListItem'
 import { NoteEditor } from '@/components/notes/NoteEditor'
@@ -34,6 +32,24 @@ function NotesApp() {
   const searchQuery = useUIStore((state) => state.searchQuery)
   const selectedTags = useUIStore((state) => state.selectedTags)
   const clearDraft = useUIStore((state) => state.clearDraft)
+
+  // Clear editor when switching views if selected note doesn't belong to current view
+  useEffect(() => {
+    if (selectedNoteId && notes.length > 0) {
+      const selectedNote = notes.find((note) => note.id === selectedNoteId)
+      
+      if (selectedNote) {
+        const noteIsArchived = selectedNote.is_archived
+        const viewingArchived = viewFilter === 'archived'
+        
+        // If note's archived status doesn't match the current view, clear the editor
+        if (noteIsArchived !== viewingArchived) {
+          setSelectedNoteId(null)
+          clearDraft()
+        }
+      }
+    }
+  }, [viewFilter, selectedNoteId, notes, setSelectedNoteId, clearDraft])
 
   // Filter notes based on view filter, search, and tags
   const filteredNotes = useMemo(() => {
@@ -80,10 +96,6 @@ function NotesApp() {
           <div className="mb-4">
             <Navigation />
           </div>
-
-          <Separator className="my-4 bg-[#e0e4ea]" />
-
-          <TagsPanel />
         </div>
 
         <UserMenu />

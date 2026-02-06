@@ -4,10 +4,10 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { useUIStore } from '@/lib/store/ui-store'
 import { useUpdateNote, useCreateNote } from '@/hooks/use-notes'
+import { Plus, X } from 'lucide-react'
 
 export function NoteEditor() {
   const selectedNoteId = useUIStore((state) => state.selectedNoteId)
@@ -20,13 +20,22 @@ export function NoteEditor() {
   const clearDraft = useUIStore((state) => state.clearDraft)
   const setSelectedNoteId = useUIStore((state) => state.setSelectedNoteId)
 
-  const [newTag, setNewTag] = useState('')
+  const [tagInputs, setTagInputs] = useState<string[]>([''])
   const [lastSaved, setLastSaved] = useState<Date | null>(null)
 
   const updateNote = useUpdateNote()
   const createNote = useCreateNote()
 
   const isNewNote = !selectedNoteId
+
+  // Sync tagInputs with draftTags when note is loaded
+  useEffect(() => {
+    if (draftTags.length > 0) {
+      setTagInputs(draftTags)
+    } else {
+      setTagInputs([''])
+    }
+  }, [selectedNoteId, draftTags])
 
   const handleSave = async () => {
     if (!draftTitle.trim()) {
@@ -62,24 +71,38 @@ export function NoteEditor() {
   const handleCancel = () => {
     clearDraft()
     setSelectedNoteId(null)
+    setTagInputs([''])
   }
 
-  const handleAddTag = () => {
-    if (newTag.trim() && !draftTags.includes(newTag.trim())) {
-      setDraftTags([...draftTags, newTag.trim()])
-      setNewTag('')
+  const handleTagChange = (index: number, value: string) => {
+    const newInputs = [...tagInputs]
+    newInputs[index] = value
+    setTagInputs(newInputs)
+    
+    // Update draftTags with non-empty values
+    const nonEmptyTags = newInputs.filter((tag) => tag.trim() !== '')
+    setDraftTags(nonEmptyTags)
+  }
+
+  const handleAddTagField = () => {
+    // Only add new field if all current fields have values
+    const allFieldsFilled = tagInputs.every((tag) => tag.trim() !== '')
+    if (allFieldsFilled) {
+      setTagInputs([...tagInputs, ''])
     }
   }
 
-  const handleRemoveTag = (tagToRemove: string) => {
-    setDraftTags(draftTags.filter((tag) => tag !== tagToRemove))
-  }
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      e.preventDefault()
-      handleAddTag()
+  const handleRemoveTagField = (index: number) => {
+    const newInputs = tagInputs.filter((_, i) => i !== index)
+    // Always keep at least one field
+    if (newInputs.length === 0) {
+      newInputs.push('')
     }
+    setTagInputs(newInputs)
+    
+    // Update draftTags
+    const nonEmptyTags = newInputs.filter((tag) => tag.trim() !== '')
+    setDraftTags(nonEmptyTags)
   }
 
   return (
@@ -94,40 +117,49 @@ export function NoteEditor() {
         />
 
         <div className="mb-5 rounded-md border-2 border-[#e0e4ea] bg-[#f9f9f9] p-3">
-          <div className="mb-2 flex items-center gap-2">
-            <div className="relative size-4">
-              <Image
-                src="/icons/tag.svg"
-                alt="Tags"
-                fill
-                className="object-contain"
-              />
+          <div className="mb-2">
+            <div className="mb-2 flex items-center gap-2">
+              <div className="relative size-4">
+                <Image
+                  src="/icons/tag.svg"
+                  alt="Tags"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+              <span className="text-sm font-medium text-[#2b303b]">Tags:</span>
             </div>
-            <span className="text-sm font-medium text-[#2b303b]">Tags:</span>
-            <div className="flex flex-wrap gap-1">
-              {draftTags.map((tag) => (
-                <Badge
-                  key={tag}
-                  variant="secondary"
-                  className="gap-1 rounded-sm border border-[#cacfd8] bg-white px-1.5 py-0.5 text-xs"
-                >
-                  {tag}
-                  <button
-                    onClick={() => handleRemoveTag(tag)}
-                    className="ml-0.5 text-[#717784] hover:text-[#0e121b]"
-                  >
-                    ×
-                  </button>
-                </Badge>
+            
+            <div className="flex flex-wrap items-start gap-2">
+              {tagInputs.map((tag, index) => (
+                <div key={index} className="relative">
+                  <Input
+                    type="text"
+                    placeholder="Enter tag..."
+                    value={tag}
+                    onChange={(e) => handleTagChange(index, e.target.value)}
+                    className="h-8 w-32 border border-[#cacfd8] bg-white px-2 py-1 text-xs focus-visible:border-[#3b82f6] focus-visible:ring-1 focus-visible:ring-[#3b82f6]"
+                  />
+                  {tagInputs.length > 1 && (
+                    <button
+                      onClick={() => handleRemoveTagField(index)}
+                      className="absolute -right-1.5 -top-1.5 flex size-4 items-center justify-center rounded-full bg-red-100 text-red-600 hover:bg-red-200 transition-colors"
+                      title="Remove tag field"
+                    >
+                      <X className="size-3" />
+                    </button>
+                  )}
+                </div>
               ))}
-              <Input
-                type="text"
-                placeholder="Add tag..."
-                value={newTag}
-                onChange={(e) => setNewTag(e.target.value)}
-                onKeyDown={handleKeyDown}
-                className="h-6 w-24 border-0 bg-transparent px-1 py-0 text-xs focus-visible:ring-0 focus-visible:ring-offset-0"
-              />
+              
+              <button
+                onClick={handleAddTagField}
+                disabled={!tagInputs.every((tag) => tag.trim() !== '')}
+                className="flex size-8 items-center justify-center rounded border border-dashed border-[#cacfd8] bg-white text-[#717784] hover:border-[#3b82f6] hover:bg-[#f0f7ff] hover:text-[#3b82f6] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-[#cacfd8] disabled:hover:bg-white disabled:hover:text-[#717784] transition-colors"
+                title="Add tag field"
+              >
+                <Plus className="size-4" />
+              </button>
             </div>
           </div>
 

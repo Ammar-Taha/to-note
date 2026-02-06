@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
@@ -12,6 +13,23 @@ interface SearchInputProps {
 export function SearchInput({ className }: SearchInputProps) {
   const searchQuery = useUIStore((state) => state.searchQuery)
   const setSearchQuery = useUIStore((state) => state.setSearchQuery)
+  
+  // Local state for immediate input updates
+  const [localValue, setLocalValue] = useState(searchQuery)
+
+  // Sync local value when store value changes externally
+  useEffect(() => {
+    setLocalValue(searchQuery)
+  }, [searchQuery])
+
+  // Debounce: Update store after 300ms of no typing
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setSearchQuery(localValue)
+    }, 300)
+
+    return () => clearTimeout(timer)
+  }, [localValue, setSearchQuery])
 
   return (
     <div
@@ -31,8 +49,8 @@ export function SearchInput({ className }: SearchInputProps) {
       <Input
         type="text"
         placeholder="Search by title, content, or tags..."
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
+        value={localValue}
+        onChange={(e) => setLocalValue(e.target.value)}
         className="h-auto border-0 bg-transparent p-0 text-sm text-[#0e121b] placeholder:text-[#717784] focus-visible:ring-0 focus-visible:ring-offset-0"
       />
     </div>

@@ -25,6 +25,9 @@ export function NoteEditorHeader() {
         id: selectedNote.id,
         isArchived: !selectedNote.is_archived,
       })
+      // Clear editor pane after archiving
+      setSelectedNoteId(null)
+      clearDraft()
     } catch (error) {
       console.error('Failed to toggle archive:', error)
     }

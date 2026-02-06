@@ -8,12 +8,12 @@ interface LogoProps {
 export function Logo({ className }: LogoProps) {
   return (
     <div className={cn('flex items-center gap-2.5', className)}>
-      <div className="relative size-7">
+      <div className="relative size-8">
         <Image
           src="/tonote.png"
           alt="ToNote"
           fill
-          sizes="28px"
+          sizes="32px"
           className="object-contain"
           unoptimized
         />

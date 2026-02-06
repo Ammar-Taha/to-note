@@ -116,7 +116,7 @@ function OtpLoginContent() {
       {/* Logo */}
       <div className="flex items-center justify-center gap-2.5 mb-6">
         <Image
-          src="/assets/tonote-logo.png"
+          src="/tonote.png"
           alt="ToNote"
           width={28}
           height={28}
@@ -305,7 +305,7 @@ export default function OtpLoginPage() {
       <div className="w-full max-w-[540px] bg-white rounded-[12px] border border-[#e0e4ea] shadow-[0px_8px_12px_rgba(240,240,240,0.6)] p-8">
         <div className="flex items-center justify-center gap-2.5 mb-6">
           <Image
-            src="/assets/tonote-logo.png"
+            src="/tonote.png"
             alt="ToNote"
             width={28}
             height={28}
