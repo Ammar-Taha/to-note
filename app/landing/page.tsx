@@ -26,11 +26,11 @@ export default function LandingPage() {
         {/* Logo */}
         <div className="flex items-center justify-center gap-2.5 mb-12">
           <Image
-            src="/assets/feather-logo.svg"
+            src="/assets/tonote-logo.png"
             alt="ToNote"
             width={40}
             height={40}
-            className="text-[#3b82f6]"
+            className="object-contain"
           />
           <h1 className="font-[family-name:var(--font-pacifico)] text-[32px] leading-none tracking-[-0.64px] text-[#0e121b]">
             ToNote

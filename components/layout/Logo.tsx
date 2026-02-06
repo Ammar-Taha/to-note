@@ -10,7 +10,7 @@ export function Logo({ className }: LogoProps) {
     <div className={cn('flex items-center gap-2.5', className)}>
       <div className="relative size-7">
         <Image
-          src="/icons/logo-feather.svg"
+          src="/assets/tonote-logo.png"
           alt="ToNote"
           fill
           className="object-contain"
