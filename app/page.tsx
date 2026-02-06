@@ -17,11 +17,13 @@ import { useNotes } from '@/hooks/use-notes'
 import { useUIStore } from '@/lib/store/ui-store'
 import { ProtectedRoute } from './protected-route'
 import { UserMenu } from '@/components/sidebar/UserMenu'
+import { SettingsDialog } from '@/components/settings/SettingsDialog'
 
 export default function Home() {
   return (
     <ProtectedRoute>
       <NotesApp />
+      <SettingsDialog />
     </ProtectedRoute>
   )
 }
@@ -37,6 +39,7 @@ function NotesApp() {
   const clearDraft = useUIStore((state) => state.clearDraft)
   const isEditing = useUIStore((state) => state.isEditing)
   const setIsEditing = useUIStore((state) => state.setIsEditing)
+  const openSettings = useUIStore((state) => state.openSettings)
 
   // Clear editor when switching views if selected note doesn't belong to current view
   useEffect(() => {
@@ -122,7 +125,10 @@ function NotesApp() {
             </h1>
             <div className="flex items-center gap-4">
               <SearchInput className="w-[450px]" />
-              <button className="flex size-6 items-center justify-center">
+              <button
+                onClick={openSettings}
+                className="flex size-6 items-center justify-center hover:opacity-70 transition-opacity"
+              >
                 <div className="relative size-5">
                   <Image
                     src="/icons/settings.svg"
