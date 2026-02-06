@@ -44,7 +44,7 @@ export default function ResetPasswordPage() {
   }
 
   return (
-    <div className="w-full max-w-[540px] bg-white rounded-[12px] border border-[#e0e4ea] shadow-[0px_8px_12px_rgba(240,240,240,0.6)] p-8 space-y-4">
+    <div className="w-full max-w-[540px] bg-card rounded-[12px] border border-border shadow-[0px_8px_12px_rgba(240,240,240,0.6)] p-8 space-y-4">
       {/* Logo */}
       <div className="flex items-center justify-center gap-2.5">
         <Image
@@ -55,17 +55,17 @@ export default function ResetPasswordPage() {
           className="object-contain"
           unoptimized
         />
-        <h1 className="font-[family-name:var(--font-pacifico)] text-[23px] leading-none tracking-[-0.46px] text-[#0e121b]">
+        <h1 className="font-[family-name:var(--font-pacifico)] text-[23px] leading-none tracking-[-0.46px] text-foreground">
           ToNote
         </h1>
       </div>
 
       {/* Header */}
       <div className="space-y-2 text-center">
-        <h2 className="text-2xl font-bold tracking-[-0.5px] leading-[28.8px] text-[#0e121b]">
+        <h2 className="text-2xl font-bold tracking-[-0.5px] leading-[28.8px] text-foreground">
           Reset Your Password
         </h2>
-        <p className="text-sm tracking-[-0.2px] text-[#525866]">
+        <p className="text-sm tracking-[-0.2px] text-muted-foreground">
           Choose a new password to secure your account.
         </p>
       </div>
@@ -82,7 +82,7 @@ export default function ResetPasswordPage() {
         <div className="space-y-1.5">
           <Label
             htmlFor="new-password"
-            className="text-sm font-medium tracking-[-0.2px] leading-[16.8px] text-[#0e121b]"
+            className="text-sm font-medium tracking-[-0.2px] leading-[16.8px] text-foreground"
           >
             New Password
           </Label>
@@ -93,12 +93,12 @@ export default function ResetPasswordPage() {
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               required
-              className="h-11 rounded-[12px] border-[#e0e4ea] pr-10"
+              className="h-11 rounded-[12px] border-border pr-10"
             />
             <button
               type="button"
               onClick={() => setShowNewPassword(!showNewPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-[#525866] hover:text-[#0e121b]"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
             >
               <Image
                 src="/assets/eye-icon.svg"
@@ -114,9 +114,9 @@ export default function ResetPasswordPage() {
               alt="Info"
               width={16}
               height={16}
-              className="text-[#525866]"
+              className="text-muted-foreground"
             />
-            <span className="text-xs text-[#525866]">
+            <span className="text-xs text-muted-foreground">
               At least 8 characters
             </span>
           </div>
@@ -125,7 +125,7 @@ export default function ResetPasswordPage() {
         <div className="space-y-1.5">
           <Label
             htmlFor="confirm-password"
-            className="text-sm font-medium tracking-[-0.2px] leading-[16.8px] text-[#0e121b]"
+            className="text-sm font-medium tracking-[-0.2px] leading-[16.8px] text-foreground"
           >
             Confirm New Password
           </Label>
@@ -136,12 +136,12 @@ export default function ResetPasswordPage() {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
-              className="h-11 rounded-[12px] border-[#e0e4ea] pr-10"
+              className="h-11 rounded-[12px] border-border pr-10"
             />
             <button
               type="button"
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-[#525866] hover:text-[#0e121b]"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
             >
               <Image
                 src="/assets/eye-icon.svg"
@@ -156,7 +156,7 @@ export default function ResetPasswordPage() {
         <Button
           type="submit"
           disabled={isLoading}
-          className="w-full h-12 bg-[#3b82f6] hover:bg-[#3b82f6]/90 text-white rounded-[12px] text-base font-semibold tracking-[-0.3px] leading-[19.2px]"
+          className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground rounded-[12px] text-base font-semibold tracking-[-0.3px] leading-[19.2px]"
         >
           {isLoading ? 'Resetting...' : 'Reset Password'}
         </Button>

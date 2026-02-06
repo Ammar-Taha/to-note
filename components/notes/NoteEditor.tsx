@@ -125,10 +125,10 @@ export function NoteEditor() {
           placeholder="Note title..."
           value={draftTitle}
           onChange={(e) => setDraftTitle(e.target.value)}
-          className="mb-4 border-0 border-b-2 border-dashed border-[#e0e4ea] px-0 text-2xl font-bold leading-tight tracking-[-0.5px] placeholder:text-[#cacfd8] focus-visible:border-[#0e121b] focus-visible:ring-0 focus-visible:ring-offset-0"
+          className="mb-4 border-0 border-b-2 border-dashed border-border px-0 text-2xl font-bold leading-tight tracking-[-0.5px] placeholder:text-muted-foreground focus-visible:border-primary focus-visible:ring-0 focus-visible:ring-offset-0"
         />
 
-        <div className="mb-5 rounded-md border-2 border-[#e0e4ea] bg-[#f9f9f9] p-3">
+        <div className="mb-5 rounded-md border-2 border-border bg-muted/50 p-3">
           <div className="mb-2">
             <div className="mb-2 flex items-center gap-2">
               <div className="relative size-4">
@@ -139,7 +139,7 @@ export function NoteEditor() {
                   className="object-contain"
                 />
               </div>
-              <span className="text-sm font-medium text-[#2b303b]">Tags:</span>
+              <span className="text-sm font-medium text-muted-foreground">Tags:</span>
             </div>
             
             <div className="flex flex-wrap items-start gap-2">
@@ -150,7 +150,7 @@ export function NoteEditor() {
                     placeholder="Enter tag..."
                     value={tag}
                     onChange={(e) => handleTagChange(index, e.target.value)}
-                    className="h-8 w-32 border border-[#cacfd8] bg-white px-2 py-1 text-xs focus-visible:border-[#3b82f6] focus-visible:ring-1 focus-visible:ring-[#3b82f6]"
+                    className="h-8 w-32 border border-border bg-background px-2 py-1 text-xs focus-visible:border-primary focus-visible:ring-1 focus-visible:ring-ring"
                   />
                   {tagInputs.length > 1 && (
                     <button
@@ -167,7 +167,7 @@ export function NoteEditor() {
               <button
                 onClick={handleAddTagField}
                 disabled={!tagInputs.every((tag) => tag.trim() !== '')}
-                className="flex size-8 items-center justify-center rounded border border-dashed border-[#cacfd8] bg-white text-[#717784] hover:border-[#3b82f6] hover:bg-[#f0f7ff] hover:text-[#3b82f6] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-[#cacfd8] disabled:hover:bg-white disabled:hover:text-[#717784] transition-colors"
+                className="flex size-8 items-center justify-center rounded border border-dashed border-border bg-background text-muted-foreground hover:border-primary hover:bg-accent hover:text-primary disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-border disabled:hover:bg-background disabled:hover:text-muted-foreground transition-colors"
                 title="Add tag field"
               >
                 <Plus className="size-4" />
@@ -176,7 +176,7 @@ export function NoteEditor() {
           </div>
 
           {selectedNoteId && (
-            <div className="flex items-center gap-2 text-sm text-[#717784]">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <div className="relative size-4">
                 <Image
                   src="/icons/clock.svg"
@@ -202,8 +202,8 @@ export function NoteEditor() {
         />
       </div>
 
-      <div className="flex items-center justify-between border-t-2 border-[#e0e4ea] bg-[#f9f9f9] px-6 py-4">
-        <div className="text-xs text-[#717784]">
+      <div className="flex items-center justify-between border-t-2 border-border bg-muted/50 px-6 py-4">
+        <div className="text-xs text-muted-foreground">
           {lastSaved && (
             <span>Auto-saved at {lastSaved.toLocaleTimeString()}</span>
           )}
@@ -212,7 +212,7 @@ export function NoteEditor() {
           <Button
             variant="outline"
             onClick={handleCancel}
-            className="border-[#cacfd8]"
+            className="border-border"
           >
             {isNewNote ? 'Cancel' : 'Cancel Edit'}
           </Button>

@@ -53,7 +53,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="w-full max-w-[540px] bg-white rounded-[12px] border border-[#e0e4ea] shadow-[0px_8px_12px_rgba(240,240,240,0.6)] p-8 space-y-4">
+    <div className="w-full max-w-[540px] bg-card rounded-[12px] border border-border shadow-[0px_8px_12px_rgba(240,240,240,0.6)] p-8 space-y-4">
       {/* Logo */}
       <div className="flex items-center justify-center gap-2.5">
         <Image
@@ -64,17 +64,17 @@ export default function LoginPage() {
           className="object-contain"
           unoptimized
         />
-        <h1 className="font-[family-name:var(--font-pacifico)] text-[23px] leading-none tracking-[-0.46px] text-[#0e121b]">
+        <h1 className="font-[family-name:var(--font-pacifico)] text-[23px] leading-none tracking-[-0.46px] text-foreground">
           ToNote
         </h1>
       </div>
 
       {/* Header */}
       <div className="space-y-2 text-center">
-        <h2 className="text-2xl font-bold tracking-[-0.5px] leading-[28.8px] text-[#0e121b]">
+        <h2 className="text-2xl font-bold tracking-[-0.5px] leading-[28.8px] text-foreground">
           Welcome to ToNote
         </h2>
-        <p className="text-sm tracking-[-0.2px] text-[#525866]">
+        <p className="text-sm tracking-[-0.2px] text-muted-foreground">
           Please log in to continue
         </p>
       </div>
@@ -91,7 +91,7 @@ export default function LoginPage() {
         <div className="space-y-1.5">
           <Label
             htmlFor="email"
-            className="text-sm font-medium tracking-[-0.2px] leading-[16.8px] text-[#0e121b]"
+            className="text-sm font-medium tracking-[-0.2px] leading-[16.8px] text-foreground"
           >
             Email Address
           </Label>
@@ -102,7 +102,7 @@ export default function LoginPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="h-11 rounded-[12px] border-[#e0e4ea] placeholder:text-[#717784]"
+            className="h-11 rounded-[12px] border-border placeholder:text-muted-foreground"
           />
         </div>
 
@@ -110,13 +110,13 @@ export default function LoginPage() {
           <div className="flex items-center justify-between gap-2">
             <Label
               htmlFor="password"
-              className="text-sm font-medium tracking-[-0.2px] leading-[16.8px] text-[#0e121b]"
+              className="text-sm font-medium tracking-[-0.2px] leading-[16.8px] text-foreground"
             >
               Password
             </Label>
             <Link
               href="/forgot-password"
-              className="text-xs text-[#525866] underline hover:text-[#0e121b]"
+              className="text-xs text-muted-foreground underline hover:text-foreground"
             >
               Forgot
             </Link>
@@ -128,12 +128,12 @@ export default function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="h-11 rounded-[12px] border-[#e0e4ea] pr-10"
+              className="h-11 rounded-[12px] border-border pr-10"
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-[#525866] hover:text-[#0e121b]"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
             >
               <Image
                 src="/assets/eye-icon.svg"
@@ -148,7 +148,7 @@ export default function LoginPage() {
         <Button
           type="submit"
           disabled={isLoading}
-          className="w-full h-12 bg-[#3b82f6] hover:bg-[#3b82f6]/90 text-white rounded-[12px] text-base font-semibold tracking-[-0.3px] leading-[19.2px]"
+          className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground rounded-[12px] text-base font-semibold tracking-[-0.3px] leading-[19.2px]"
         >
           {isLoading ? 'Logging in...' : 'Login'}
         </Button>
@@ -157,10 +157,10 @@ export default function LoginPage() {
       {/* Divider */}
       <div className="relative">
         <div className="absolute inset-0 flex items-center">
-          <div className="w-full border-t border-[#e0e4ea]"></div>
+          <div className="w-full border-t border-border"></div>
         </div>
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-white px-2 text-[#717784]">or continue with</span>
+          <span className="bg-card px-2 text-muted-foreground">or continue with</span>
         </div>
       </div>
 
@@ -171,7 +171,7 @@ export default function LoginPage() {
           <Button
             type="button"
             variant="outline"
-            className="w-full h-12 rounded-[12px] border-2 border-[#3b82f6] bg-[#f0f7ff] hover:bg-[#e0f0ff] text-[#3b82f6]"
+            className="w-full h-12 rounded-[12px] border-2 border-primary bg-primary/10 hover:bg-primary/20 text-primary"
           >
             <Mail className="w-5 h-5 mr-2" />
             <span className="text-base font-semibold tracking-[-0.3px]">
@@ -185,7 +185,7 @@ export default function LoginPage() {
           type="button"
           variant="outline"
           onClick={handleGoogleSignIn}
-          className="w-full h-12 rounded-[12px] border-[#cacfd8] hover:bg-gray-50"
+          className="w-full h-12 rounded-[12px] border-border hover:bg-muted"
         >
           <Image
             src="/assets/google-icon.svg"
@@ -194,19 +194,19 @@ export default function LoginPage() {
             height={18}
             className="mr-2"
           />
-          <span className="text-base font-medium tracking-[0.5px] leading-4 text-[#0e121b]">
+          <span className="text-base font-medium tracking-[0.5px] leading-4 text-foreground">
             Continue with Google
           </span>
         </Button>
       </div>
 
       {/* Sign Up Link */}
-      <div className="pt-4 border-t border-[#e0e4ea]">
-        <p className="text-sm text-center tracking-[-0.2px] text-[#525866]">
+      <div className="pt-4 border-t border-border">
+        <p className="text-sm text-center tracking-[-0.2px] text-muted-foreground">
           No account yet?{' '}
           <Link
             href="/signup"
-            className="text-[#0e121b] font-medium hover:underline"
+            className="text-foreground font-medium hover:underline"
           >
             Sign Up
           </Link>

@@ -33,10 +33,10 @@ export function FontThemeSettings() {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-1">
-        <h2 className="text-base font-semibold leading-tight tracking-[-0.3px] text-[#0e121b]">
+        <h2 className="text-base font-semibold leading-tight tracking-[-0.3px] text-foreground">
           Font Theme
         </h2>
-        <p className="text-sm font-normal tracking-[-0.2px] text-[#717784]">
+        <p className="text-sm font-normal tracking-[-0.2px] text-muted-foreground">
           Choose your font theme:
         </p>
       </div>
@@ -48,7 +48,7 @@ export function FontThemeSettings() {
           description="Clean and modern, easy to read."
           selected={selectedFont === 'sans'}
           onClick={() => setSelectedFont('sans')}
-          iconBgColor="bg-[#0e121b]"
+          iconBgColor="bg-primary"
         />
         <ThemeOption
           icon="/icons/font-serif.svg"
@@ -56,7 +56,7 @@ export function FontThemeSettings() {
           description="Classic and elegant for a timeless feel."
           selected={selectedFont === 'serif'}
           onClick={() => setSelectedFont('serif')}
-          iconBgColor="bg-[#0e121b]"
+          iconBgColor="bg-primary"
         />
         <ThemeOption
           icon="/icons/font-mono.svg"
@@ -64,14 +64,14 @@ export function FontThemeSettings() {
           description="Code-like, great for a technical vibe."
           selected={selectedFont === 'mono'}
           onClick={() => setSelectedFont('mono')}
-          iconBgColor="bg-[#0e121b]"
+          iconBgColor="bg-primary"
         />
       </div>
 
       <div className="flex justify-end">
         <Button
           onClick={handleApply}
-          className="bg-[#3b82f6] px-6 py-2 text-sm font-medium text-white hover:bg-[#2563eb]"
+          className="bg-primary px-6 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
         >
           Apply Changes
         </Button>

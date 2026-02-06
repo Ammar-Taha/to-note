@@ -38,15 +38,15 @@ export function SettingsMenu() {
   ]
 
   return (
-    <div className="flex w-[258px] flex-col gap-2 border-r border-[#e0e4ea] p-8">
+    <div className="flex w-[258px] flex-col gap-2 border-r border-border p-8">
       {menuItems.map((item) => (
         <button
           key={item.id}
           onClick={() => setActiveSection(item.id)}
           className={`flex items-center gap-2 rounded-md px-2 py-2.5 transition-colors ${
             activeSection === item.id
-              ? 'bg-[#f3f5f8]'
-              : 'hover:bg-[#f9f9f9]'
+              ? 'bg-muted'
+              : 'hover:bg-muted'
           }`}
         >
           <div className="relative size-5">
@@ -57,20 +57,20 @@ export function SettingsMenu() {
               className="object-contain"
             />
           </div>
-          <span className="flex-1 text-left text-sm font-medium leading-tight tracking-[-0.2px] text-[#0e121b]">
+          <span className="flex-1 text-left text-sm font-medium leading-tight tracking-[-0.2px] text-foreground">
             {item.label}
           </span>
           {item.showChevron && activeSection === item.id && (
-            <ChevronRight className="size-3.5 text-[#0e121b]" strokeWidth={2.5} />
+            <ChevronRight className="size-3.5 text-foreground" strokeWidth={2.5} />
           )}
         </button>
       ))}
 
-      <div className="my-2 h-px bg-[#e0e4ea]" />
+      <div className="my-2 h-px bg-border" />
 
       <button
         onClick={handleLogout}
-        className="flex items-center gap-2 rounded-md px-2 py-2.5 transition-colors hover:bg-[#f9f9f9]"
+        className="flex items-center gap-2 rounded-md px-2 py-2.5 transition-colors hover:bg-muted"
       >
         <div className="relative size-5">
           <Image
@@ -80,7 +80,7 @@ export function SettingsMenu() {
             className="object-contain"
           />
         </div>
-        <span className="text-left text-sm font-medium leading-tight tracking-[-0.2px] text-[#2b303b]">
+        <span className="text-left text-sm font-medium leading-tight tracking-[-0.2px] text-muted-foreground">
           Logout
         </span>
       </button>

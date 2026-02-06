@@ -24,13 +24,13 @@ export function ThemeOption({
       onClick={onClick}
       className={`flex w-full items-center gap-4 rounded-xl border p-4 text-left transition-colors ${
         selected
-          ? 'border-[#e0e4ea] bg-[#f3f5f8]'
-          : 'border-[#e0e4ea] bg-white hover:bg-[#f9f9f9]'
+          ? 'border-border bg-muted'
+          : 'border-border bg-card hover:bg-muted'
       }`}
     >
       <div
         className={`flex size-12 items-center justify-center rounded-lg ${
-          iconBgColor || 'bg-white'
+          iconBgColor || 'bg-muted'
         }`}
       >
         <div className="relative size-6">
@@ -38,18 +38,18 @@ export function ThemeOption({
         </div>
       </div>
       <div className="flex-1">
-        <div className="text-sm font-medium leading-tight tracking-[-0.2px] text-[#0e121b]">
+        <div className="text-sm font-medium leading-tight tracking-[-0.2px] text-foreground">
           {title}
         </div>
-        <div className="mt-1.5 text-xs font-normal leading-tight tracking-[-0.2px] text-[#2b303b]">
+        <div className="mt-1.5 text-xs font-normal leading-tight tracking-[-0.2px] text-muted-foreground">
           {description}
         </div>
       </div>
       <div className="flex size-4 items-center justify-center">
         {selected ? (
-          <div className="size-4 rounded-full border-4 border-[#3b82f6]" />
+          <div className="size-4 rounded-full border-4 border-primary" />
         ) : (
-          <div className="size-4 rounded-full border-2 border-[#cacfd8]" />
+          <div className="size-4 rounded-full border-2 border-border" />
         )}
       </div>
     </button>

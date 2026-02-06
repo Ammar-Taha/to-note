@@ -112,7 +112,7 @@ function OtpLoginContent() {
   }
 
   return (
-    <div className="w-full max-w-[540px] bg-white rounded-[12px] border border-[#e0e4ea] shadow-[0px_8px_12px_rgba(240,240,240,0.6)] p-8">
+    <div className="w-full max-w-[540px] bg-card rounded-[12px] border border-border shadow-[0px_8px_12px_rgba(240,240,240,0.6)] p-8">
       {/* Logo */}
       <div className="flex items-center justify-center gap-2.5 mb-6">
         <Image
@@ -123,7 +123,7 @@ function OtpLoginContent() {
           className="object-contain"
           unoptimized
         />
-        <h1 className="font-[family-name:var(--font-pacifico)] text-[23px] leading-none tracking-[-0.46px] text-[#0e121b]">
+        <h1 className="font-[family-name:var(--font-pacifico)] text-[23px] leading-none tracking-[-0.46px] text-foreground">
           ToNote
         </h1>
       </div>
@@ -132,13 +132,13 @@ function OtpLoginContent() {
       {step === 'email' && (
         <div className="space-y-6">
           <div className="space-y-2 text-center">
-            <div className="w-16 h-16 mx-auto bg-[#f0f7ff] rounded-full flex items-center justify-center mb-4">
-              <Mail className="w-8 h-8 text-[#3b82f6]" />
+            <div className="w-16 h-16 mx-auto bg-primary/10 rounded-full flex items-center justify-center mb-4">
+              <Mail className="w-8 h-8 text-primary" />
             </div>
-            <h2 className="text-2xl font-bold tracking-[-0.5px] leading-[28.8px] text-[#0e121b]">
+            <h2 className="text-2xl font-bold tracking-[-0.5px] leading-[28.8px] text-foreground">
               Sign in with Email
             </h2>
-            <p className="text-sm tracking-[-0.2px] text-[#525866]">
+            <p className="text-sm tracking-[-0.2px] text-muted-foreground">
               We'll send you a 6-digit code to verify your email
             </p>
           </div>
@@ -153,7 +153,7 @@ function OtpLoginContent() {
             <div className="space-y-1.5">
               <Label
                 htmlFor="email"
-                className="text-sm font-medium tracking-[-0.2px] leading-[16.8px] text-[#0e121b]"
+                className="text-sm font-medium tracking-[-0.2px] leading-[16.8px] text-foreground"
               >
                 Email Address
               </Label>
@@ -165,14 +165,14 @@ function OtpLoginContent() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 disabled={isLoading}
-                className="h-11 px-4 border-[#e0e4ea] rounded-[8px] text-sm"
+                className="h-11 px-4 border-border rounded-[8px] text-sm"
               />
             </div>
 
             <Button
               type="submit"
               disabled={isLoading || !email}
-              className="w-full h-11 bg-[#3b82f6] hover:bg-[#3b82f6]/90 text-white rounded-[8px] font-semibold"
+              className="w-full h-11 bg-primary hover:bg-primary/90 text-primary-foreground rounded-[8px] font-semibold"
             >
               {isLoading ? 'Sending Code...' : 'Send Verification Code'}
             </Button>
@@ -180,16 +180,16 @@ function OtpLoginContent() {
 
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-[#e0e4ea]"></div>
+              <div className="w-full border-t border-border"></div>
             </div>
             <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-white px-2 text-[#717784]">or</span>
+              <span className="bg-card px-2 text-muted-foreground">or</span>
             </div>
           </div>
 
           <Link
             href="/login"
-            className="block text-center text-sm text-[#3b82f6] hover:underline"
+            className="block text-center text-sm text-primary hover:underline"
           >
             Sign in with password instead
           </Link>
@@ -201,7 +201,7 @@ function OtpLoginContent() {
         <div className="space-y-6">
           <button
             onClick={handleBack}
-            className="flex items-center gap-2 text-sm text-[#525866] hover:text-[#0e121b] transition-colors"
+            className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
             disabled={isLoading}
           >
             <ArrowLeft className="w-4 h-4" />
@@ -209,16 +209,16 @@ function OtpLoginContent() {
           </button>
 
           <div className="space-y-2 text-center">
-            <div className="w-16 h-16 mx-auto bg-[#f0f7ff] rounded-full flex items-center justify-center mb-4">
-              <Mail className="w-8 h-8 text-[#3b82f6]" />
+            <div className="w-16 h-16 mx-auto bg-primary/10 rounded-full flex items-center justify-center mb-4">
+              <Mail className="w-8 h-8 text-primary" />
             </div>
-            <h2 className="text-2xl font-bold tracking-[-0.5px] leading-[28.8px] text-[#0e121b]">
+            <h2 className="text-2xl font-bold tracking-[-0.5px] leading-[28.8px] text-foreground">
               Check Your Email
             </h2>
-            <p className="text-sm tracking-[-0.2px] text-[#525866]">
+            <p className="text-sm tracking-[-0.2px] text-muted-foreground">
               We sent a 6-digit code to
             </p>
-            <p className="text-sm font-semibold text-[#0e121b]">{maskedEmail}</p>
+            <p className="text-sm font-semibold text-foreground">{maskedEmail}</p>
           </div>
 
           {error && (
@@ -229,7 +229,7 @@ function OtpLoginContent() {
 
           <div className="space-y-4">
             <div className="space-y-2">
-              <Label className="text-sm font-medium tracking-[-0.2px] text-[#0e121b] text-center block">
+              <Label className="text-sm font-medium tracking-[-0.2px] text-foreground text-center block">
                 Enter Verification Code
               </Label>
               <OtpInput
@@ -243,13 +243,13 @@ function OtpLoginContent() {
             </div>
 
             <div className="text-center space-y-2">
-              <p className="text-sm text-[#717784]">
+              <p className="text-sm text-muted-foreground">
                 Didn't receive the code?
               </p>
               <button
                 onClick={handleResendOtp}
                 disabled={countdown > 0 || isLoading}
-                className="text-sm font-medium text-[#3b82f6] hover:underline disabled:text-[#717784] disabled:no-underline disabled:cursor-not-allowed"
+                className="text-sm font-medium text-primary hover:underline disabled:text-muted-foreground disabled:no-underline disabled:cursor-not-allowed"
               >
                 {countdown > 0
                   ? `Resend code in ${countdown}s`
@@ -258,8 +258,8 @@ function OtpLoginContent() {
             </div>
           </div>
 
-          <div className="bg-[#f3f5f8] border border-[#e0e4ea] rounded-lg p-4">
-            <p className="text-xs text-[#525866] text-center">
+          <div className="bg-muted border border-border rounded-lg p-4">
+            <p className="text-xs text-muted-foreground text-center">
               💡 <strong>Tip:</strong> Check your spam folder if you don't see the email
             </p>
           </div>
@@ -273,24 +273,24 @@ function OtpLoginContent() {
             <Check className="w-10 h-10 text-green-600" />
           </div>
           <div className="space-y-2">
-            <h2 className="text-2xl font-bold tracking-[-0.5px] text-[#0e121b]">
+            <h2 className="text-2xl font-bold tracking-[-0.5px] text-foreground">
               Verified Successfully! ✨
             </h2>
-            <p className="text-sm text-[#525866]">
+            <p className="text-sm text-muted-foreground">
               Redirecting you to your notes...
             </p>
           </div>
           <div className="flex justify-center">
-            <div className="w-8 h-8 border-4 border-[#3b82f6] border-t-transparent rounded-full animate-spin" />
+            <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" />
           </div>
         </div>
       )}
 
       {/* Footer */}
-      <div className="mt-8 pt-6 border-t border-[#e0e4ea] text-center">
-        <p className="text-xs text-[#717784]">
+      <div className="mt-8 pt-6 border-t border-border text-center">
+        <p className="text-xs text-muted-foreground">
           Don't have an account?{' '}
-          <Link href="/signup" className="text-[#3b82f6] hover:underline">
+          <Link href="/signup" className="text-primary hover:underline">
             Sign up
           </Link>
         </p>
@@ -302,7 +302,7 @@ function OtpLoginContent() {
 export default function OtpLoginPage() {
   return (
     <Suspense fallback={
-      <div className="w-full max-w-[540px] bg-white rounded-[12px] border border-[#e0e4ea] shadow-[0px_8px_12px_rgba(240,240,240,0.6)] p-8">
+      <div className="w-full max-w-[540px] bg-card rounded-[12px] border border-border shadow-[0px_8px_12px_rgba(240,240,240,0.6)] p-8">
         <div className="flex items-center justify-center gap-2.5 mb-6">
           <Image
             src="/tonote.png"
@@ -312,12 +312,12 @@ export default function OtpLoginPage() {
             className="object-contain"
             unoptimized
           />
-          <h1 className="font-[family-name:var(--font-pacifico)] text-[23px] leading-none tracking-[-0.46px] text-[#0e121b]">
+          <h1 className="font-[family-name:var(--font-pacifico)] text-[23px] leading-none tracking-[-0.46px] text-foreground">
             ToNote
           </h1>
         </div>
         <div className="flex justify-center py-12">
-          <div className="w-8 h-8 border-4 border-[#3b82f6] border-t-transparent rounded-full animate-spin" />
+          <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" />
         </div>
       </div>
     }>

@@ -63,7 +63,7 @@ export function ChangePasswordSettings() {
 
   return (
     <div className="flex flex-col gap-6">
-      <h2 className="text-base font-semibold leading-tight tracking-[-0.3px] text-[#0e121b]">
+      <h2 className="text-base font-semibold leading-tight tracking-[-0.3px] text-foreground">
         Change Password
       </h2>
 
@@ -71,7 +71,7 @@ export function ChangePasswordSettings() {
         <div className="flex flex-col gap-1.5">
           <Label
             htmlFor="oldPassword"
-            className="text-sm font-medium leading-tight tracking-[-0.2px] text-[#0e121b]"
+            className="text-sm font-medium leading-tight tracking-[-0.2px] text-foreground"
           >
             Old Password
           </Label>
@@ -81,7 +81,7 @@ export function ChangePasswordSettings() {
               type={showOldPassword ? 'text' : 'password'}
               value={oldPassword}
               onChange={(e) => setOldPassword(e.target.value)}
-              className="h-11 border-[#e0e4ea] pr-10"
+              className="h-11 border-border pr-10"
             />
             <button
               type="button"
@@ -89,9 +89,9 @@ export function ChangePasswordSettings() {
               className="absolute right-3 top-1/2 -translate-y-1/2"
             >
               {showOldPassword ? (
-                <EyeOff className="size-5 text-[#717784]" />
+                <EyeOff className="size-5 text-muted-foreground" />
               ) : (
-                <Eye className="size-5 text-[#717784]" />
+                <Eye className="size-5 text-muted-foreground" />
               )}
             </button>
           </div>
@@ -100,7 +100,7 @@ export function ChangePasswordSettings() {
         <div className="flex flex-col gap-1.5">
           <Label
             htmlFor="newPassword"
-            className="text-sm font-medium leading-tight tracking-[-0.2px] text-[#0e121b]"
+            className="text-sm font-medium leading-tight tracking-[-0.2px] text-foreground"
           >
             New Password
           </Label>
@@ -110,7 +110,7 @@ export function ChangePasswordSettings() {
               type={showNewPassword ? 'text' : 'password'}
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
-              className="h-11 border-[#e0e4ea] pr-10"
+              className="h-11 border-border pr-10"
             />
             <button
               type="button"
@@ -118,13 +118,13 @@ export function ChangePasswordSettings() {
               className="absolute right-3 top-1/2 -translate-y-1/2"
             >
               {showNewPassword ? (
-                <EyeOff className="size-5 text-[#717784]" />
+                <EyeOff className="size-5 text-muted-foreground" />
               ) : (
-                <Eye className="size-5 text-[#717784]" />
+                <Eye className="size-5 text-muted-foreground" />
               )}
             </button>
           </div>
-          <div className="flex items-center gap-2 text-xs font-normal text-[#525866]">
+          <div className="flex items-center gap-2 text-xs font-normal text-muted-foreground">
             <div className="relative size-4">
               <Image
                 src="/icons/info-circle.svg"
@@ -140,7 +140,7 @@ export function ChangePasswordSettings() {
         <div className="flex flex-col gap-1.5">
           <Label
             htmlFor="confirmPassword"
-            className="text-sm font-medium leading-tight tracking-[-0.2px] text-[#0e121b]"
+            className="text-sm font-medium leading-tight tracking-[-0.2px] text-foreground"
           >
             Confirm New Password
           </Label>
@@ -150,7 +150,7 @@ export function ChangePasswordSettings() {
               type={showConfirmPassword ? 'text' : 'password'}
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="h-11 border-[#e0e4ea] pr-10"
+              className="h-11 border-border pr-10"
             />
             <button
               type="button"
@@ -158,9 +158,9 @@ export function ChangePasswordSettings() {
               className="absolute right-3 top-1/2 -translate-y-1/2"
             >
               {showConfirmPassword ? (
-                <EyeOff className="size-5 text-[#717784]" />
+                <EyeOff className="size-5 text-muted-foreground" />
               ) : (
-                <Eye className="size-5 text-[#717784]" />
+                <Eye className="size-5 text-muted-foreground" />
               )}
             </button>
           </div>
@@ -182,7 +182,7 @@ export function ChangePasswordSettings() {
           <Button
             type="submit"
             disabled={isLoading}
-            className="bg-[#3b82f6] px-6 py-2 text-sm font-medium text-white hover:bg-[#2563eb]"
+            className="bg-primary px-6 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
           >
             {isLoading ? 'Saving...' : 'Save Password'}
           </Button>

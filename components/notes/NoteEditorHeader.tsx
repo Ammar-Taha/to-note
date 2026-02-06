@@ -63,12 +63,12 @@ export function NoteEditorHeader() {
   if (!selectedNote) return null
 
   return (
-    <div className="flex items-center justify-end gap-2 border-b-2 border-[#e0e4ea] bg-[#f9f9f9] px-6 py-3">
+    <div className="flex items-center justify-end gap-2 border-b-2 border-border bg-muted/50 px-6 py-3">
       <Button
         variant="outline"
         onClick={handleArchive}
         disabled={toggleArchive.isPending}
-        className="gap-2 border-[#cacfd8] px-3 py-2 text-sm font-medium"
+        className="gap-2 border-border px-3 py-2 text-sm font-medium"
       >
         <div className="relative size-4">
           <Image
@@ -86,7 +86,7 @@ export function NoteEditorHeader() {
         <Button
           variant="outline"
           onClick={handleEdit}
-          className="gap-2 border-[#cacfd8] px-3 py-2 text-sm font-medium"
+          className="gap-2 border-border px-3 py-2 text-sm font-medium"
         >
           <Pencil className="size-4" />
           Edit
@@ -96,7 +96,7 @@ export function NoteEditorHeader() {
           variant="outline"
           onClick={handleDelete}
           disabled={deleteNote.isPending}
-          className="gap-2 border-[#cacfd8] px-3 py-2 text-sm font-medium text-[#525866]"
+          className="gap-2 border-border px-3 py-2 text-sm font-medium text-muted-foreground"
         >
           <div className="relative size-4">
             <Image

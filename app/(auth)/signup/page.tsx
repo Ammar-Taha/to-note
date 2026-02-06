@@ -61,7 +61,7 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="w-full max-w-[540px] bg-white rounded-[12px] border border-[#e0e4ea] shadow-[0px_8px_12px_rgba(240,240,240,0.6)] p-8 space-y-4">
+    <div className="w-full max-w-[540px] bg-card rounded-[12px] border border-border shadow-[0px_8px_12px_rgba(240,240,240,0.6)] p-8 space-y-4">
       {/* Logo */}
       <div className="flex items-center justify-center gap-2.5">
         <Image
@@ -72,17 +72,17 @@ export default function SignupPage() {
           className="object-contain"
           unoptimized
         />
-        <h1 className="font-[family-name:var(--font-pacifico)] text-[23px] leading-none tracking-[-0.46px] text-[#0e121b]">
+        <h1 className="font-[family-name:var(--font-pacifico)] text-[23px] leading-none tracking-[-0.46px] text-foreground">
           ToNote
         </h1>
       </div>
 
       {/* Header */}
       <div className="space-y-2 text-center">
-        <h2 className="text-2xl font-bold tracking-[-0.5px] leading-[28.8px] text-[#0e121b]">
+        <h2 className="text-2xl font-bold tracking-[-0.5px] leading-[28.8px] text-foreground">
           Create Your Account
         </h2>
-        <p className="text-sm tracking-[-0.2px] text-[#525866]">
+        <p className="text-sm tracking-[-0.2px] text-muted-foreground">
           Sign up to start organizing your notes and boost your productivity.
         </p>
       </div>
@@ -108,7 +108,7 @@ export default function SignupPage() {
         <div className="space-y-1.5">
           <Label
             htmlFor="email"
-            className="text-sm font-medium tracking-[-0.2px] leading-[16.8px] text-[#0e121b]"
+            className="text-sm font-medium tracking-[-0.2px] leading-[16.8px] text-foreground"
           >
             Email Address
           </Label>
@@ -119,14 +119,14 @@ export default function SignupPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="h-11 rounded-[12px] border-[#e0e4ea] placeholder:text-[#717784]"
+            className="h-11 rounded-[12px] border-border placeholder:text-muted-foreground"
           />
         </div>
 
         <div className="space-y-1.5">
           <Label
             htmlFor="password"
-            className="text-sm font-medium tracking-[-0.2px] leading-[16.8px] text-[#0e121b]"
+            className="text-sm font-medium tracking-[-0.2px] leading-[16.8px] text-foreground"
           >
             Password
           </Label>
@@ -137,12 +137,12 @@ export default function SignupPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="h-11 rounded-[12px] border-[#e0e4ea] pr-10"
+              className="h-11 rounded-[12px] border-border pr-10"
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-[#525866] hover:text-[#0e121b]"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
             >
               <Image
                 src="/assets/eye-icon.svg"
@@ -158,9 +158,9 @@ export default function SignupPage() {
               alt="Info"
               width={16}
               height={16}
-              className="text-[#525866]"
+              className="text-muted-foreground"
             />
-            <span className="text-xs text-[#525866]">
+            <span className="text-xs text-muted-foreground">
               At least 8 characters
             </span>
           </div>
@@ -169,15 +169,15 @@ export default function SignupPage() {
         <Button
           type="submit"
           disabled={isLoading || success}
-          className="w-full h-12 bg-[#3b82f6] hover:bg-[#3b82f6]/90 text-white rounded-[12px] text-base font-semibold tracking-[-0.3px] leading-[19.2px]"
+          className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground rounded-[12px] text-base font-semibold tracking-[-0.3px] leading-[19.2px]"
         >
           {isLoading ? 'Signing up...' : 'Sign up'}
         </Button>
       </form>
 
       {/* Divider with Google OAuth */}
-      <div className="space-y-4 pt-4 border-t border-[#e0e4ea]">
-        <p className="text-sm text-center tracking-[-0.2px] text-[#525866]">
+      <div className="space-y-4 pt-4 border-t border-border">
+        <p className="text-sm text-center tracking-[-0.2px] text-muted-foreground">
           Or log in with:
         </p>
         <Button
@@ -185,7 +185,7 @@ export default function SignupPage() {
           variant="outline"
           onClick={handleGoogleSignIn}
           disabled={success}
-          className="w-full h-12 rounded-[12px] border-[#cacfd8] hover:bg-gray-50"
+          className="w-full h-12 rounded-[12px] border-border hover:bg-muted"
         >
           <Image
             src="/assets/google-icon.svg"
@@ -194,19 +194,19 @@ export default function SignupPage() {
             height={18}
             className="mr-2"
           />
-          <span className="text-base font-medium tracking-[0.5px] leading-4 text-[#0e121b]">
+          <span className="text-base font-medium tracking-[0.5px] leading-4 text-foreground">
             Google
           </span>
         </Button>
       </div>
 
       {/* Login Link */}
-      <div className="pt-4 border-t border-[#e0e4ea]">
-        <p className="text-sm text-center tracking-[-0.2px] text-[#525866]">
+      <div className="pt-4 border-t border-border">
+        <p className="text-sm text-center tracking-[-0.2px] text-muted-foreground">
           Already have an account?{' '}
           <Link
             href="/login"
-            className="text-[#0e121b] font-medium hover:underline"
+            className="text-foreground font-medium hover:underline"
           >
             Login
           </Link>

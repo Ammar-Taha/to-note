@@ -97,17 +97,17 @@ function NotesApp() {
   }
 
   return (
-    <div className="flex h-screen bg-[#f3f5f8]">
+    <div className="flex h-screen bg-background">
       {/* Sidebar */}
-      <div className="w-[280px] border-r border-[#e0e4ea] bg-[#fafafa] p-4 flex flex-col">
+      <div className="w-[280px] border-r border-border bg-muted/50 p-4 flex flex-col">
         <div className="flex-1">
-          <Logo className="mb-6 border-b-2 border-[#e0e4ea] pb-4" />
+          <Logo className="mb-6 border-b-2 border-border pb-4" />
 
           <div className="mb-4">
             <Navigation />
           </div>
 
-          <Separator className="my-4 bg-[#e0e4ea]" />
+          <Separator className="my-4 bg-border" />
 
           <TagsPanel />
         </div>
@@ -118,9 +118,9 @@ function NotesApp() {
       {/* Main Content */}
       <div className="flex flex-1 flex-col">
         {/* Header */}
-        <div className="border-b border-[#e0e4ea] bg-white px-6 py-5">
+        <div className="border-b border-border bg-card px-6 py-5">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold leading-tight tracking-[-0.5px] text-[#0e121b]">
+            <h1 className="text-2xl font-bold leading-tight tracking-[-0.5px] text-foreground">
               {viewFilter === 'archived' ? 'Archived Notes' : 'All Notes'}
             </h1>
             <div className="flex items-center gap-4">
@@ -143,13 +143,13 @@ function NotesApp() {
         </div>
 
         {/* Two Column Layout */}
-        <div className="grid flex-1 grid-cols-[320px_1fr] overflow-hidden">
+          <div className="grid flex-1 grid-cols-[320px_1fr] overflow-hidden">
           {/* Notes Panel */}
-          <div className="flex flex-col border-r border-[#e0e4ea]">
-            <div className="border-b-2 border-[#e0e4ea] bg-[#f9f9f9] p-4">
+          <div className="flex flex-col border-r border-border">
+            <div className="border-b-2 border-border bg-muted/50 p-4">
               <Button
                 onClick={handleCreateNew}
-                className="w-full gap-2 bg-[#0e121b] text-white hover:bg-[#2b303b]"
+                className="w-full gap-2 bg-primary text-primary-foreground hover:bg-primary/90"
               >
                 <span className="text-lg">+</span>
                 Create New Note
@@ -158,11 +158,11 @@ function NotesApp() {
 
             <ScrollArea className="flex-1 p-4">
               {isLoading ? (
-                <div className="py-8 text-center text-sm text-[#717784]">
+                <div className="py-8 text-center text-sm text-muted-foreground">
                   Loading notes...
                 </div>
               ) : filteredNotes.length === 0 ? (
-                <div className="py-8 text-center text-sm text-[#717784]">
+                <div className="py-8 text-center text-sm text-muted-foreground">
                   {searchQuery || selectedTags.length > 0
                     ? 'No notes match your filters'
                     : 'No notes yet. Create your first note!'}
@@ -198,7 +198,7 @@ function NotesApp() {
             ) : (
               <div className="flex flex-1 items-center justify-center">
                 <div className="text-center">
-                  <p className="text-lg text-[#717784]">
+                  <p className="text-lg text-muted-foreground">
                     Select a note or create a new one
                   </p>
                 </div>

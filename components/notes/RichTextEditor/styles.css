@@ -128,12 +128,12 @@
 }
 
 .tiptap-editor .prose a {
-  color: #2563eb;
+  color: var(--color-primary);
   text-decoration: underline;
 }
 
 .tiptap-editor .prose a:hover {
-  color: #1e40af;
+  opacity: 0.9;
 }
 
 /* Task list styles */
@@ -198,7 +198,7 @@
 
 /* Selected cell highlighting */
 .tiptap-editor .prose table .selectedCell {
-  background-color: #dbeafe;
+  background-color: var(--color-accent);
 }
 
 /* Focus styles */

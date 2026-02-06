@@ -34,7 +34,7 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className="w-full max-w-[540px] bg-white rounded-[12px] border border-[#e0e4ea] shadow-[0px_8px_12px_rgba(240,240,240,0.6)] p-8 space-y-4">
+    <div className="w-full max-w-[540px] bg-card rounded-[12px] border border-border shadow-[0px_8px_12px_rgba(240,240,240,0.6)] p-8 space-y-4">
       {/* Logo */}
       <div className="flex items-center justify-center gap-2.5">
         <Image
@@ -45,17 +45,17 @@ export default function ForgotPasswordPage() {
           className="object-contain"
           unoptimized
         />
-        <h1 className="font-[family-name:var(--font-pacifico)] text-[23px] leading-none tracking-[-0.46px] text-[#0e121b]">
+        <h1 className="font-[family-name:var(--font-pacifico)] text-[23px] leading-none tracking-[-0.46px] text-foreground">
           ToNote
         </h1>
       </div>
 
       {/* Header */}
       <div className="space-y-2 text-center">
-        <h2 className="text-2xl font-bold tracking-[-0.5px] leading-[28.8px] text-[#0e121b]">
+        <h2 className="text-2xl font-bold tracking-[-0.5px] leading-[28.8px] text-foreground">
           Forgotten your password?
         </h2>
-        <p className="text-sm tracking-[-0.2px] text-[#525866]">
+        <p className="text-sm tracking-[-0.2px] text-muted-foreground">
           Enter your email below, and we will send you a link to reset it.
         </p>
       </div>
@@ -81,7 +81,7 @@ export default function ForgotPasswordPage() {
         <div className="space-y-1.5">
           <Label
             htmlFor="email"
-            className="text-sm font-medium tracking-[-0.2px] leading-[16.8px] text-[#0e121b]"
+            className="text-sm font-medium tracking-[-0.2px] leading-[16.8px] text-foreground"
           >
             Email Address
           </Label>
@@ -92,14 +92,14 @@ export default function ForgotPasswordPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="h-11 rounded-[12px] border-[#e0e4ea] placeholder:text-[#717784]"
+            className="h-11 rounded-[12px] border-border placeholder:text-muted-foreground"
           />
         </div>
 
         <Button
           type="submit"
           disabled={isLoading || success}
-          className="w-full h-12 bg-[#3b82f6] hover:bg-[#3b82f6]/90 text-white rounded-[12px] text-base font-semibold tracking-[-0.3px] leading-[19.2px]"
+          className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground rounded-[12px] text-base font-semibold tracking-[-0.3px] leading-[19.2px]"
         >
           {isLoading ? "Sending..." : "Send Reset Link"}
         </Button>
@@ -109,7 +109,7 @@ export default function ForgotPasswordPage() {
       <div className="pt-4 text-center">
         <Link
           href="/login"
-          className="text-sm text-[#525866] hover:text-[#0e121b] hover:underline"
+          className="text-sm text-muted-foreground hover:text-foreground hover:underline"
         >
           Back to Login
         </Link>

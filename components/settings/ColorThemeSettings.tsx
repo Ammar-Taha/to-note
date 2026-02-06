@@ -38,10 +38,10 @@ export function ColorThemeSettings() {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-1">
-        <h2 className="text-base font-semibold leading-tight tracking-[-0.3px] text-[#0e121b]">
+        <h2 className="text-base font-semibold leading-tight tracking-[-0.3px] text-foreground">
           Color Theme
         </h2>
-        <p className="text-sm font-normal tracking-[-0.2px] text-[#717784]">
+        <p className="text-sm font-normal tracking-[-0.2px] text-muted-foreground">
           Choose your color theme:
         </p>
       </div>
@@ -73,7 +73,7 @@ export function ColorThemeSettings() {
       <div className="flex justify-end">
         <Button
           onClick={handleApply}
-          className="bg-[#3b82f6] px-6 py-2 text-sm font-medium text-white hover:bg-[#2563eb]"
+          className="bg-primary px-6 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
         >
           Apply Changes
         </Button>

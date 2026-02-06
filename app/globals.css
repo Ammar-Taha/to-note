@@ -270,12 +270,12 @@
   }
 
   .note-viewer-content a {
-    color: #2563eb;
+    color: var(--color-primary);
     text-decoration: underline;
   }
 
   .note-viewer-content a:hover {
-    color: #1e40af;
+    opacity: 0.9;
   }
 
   .note-viewer-content table {

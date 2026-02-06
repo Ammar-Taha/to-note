@@ -13,17 +13,17 @@ export function TagsPanel() {
   if (isLoading) {
     return (
       <div>
-        <div className="mb-2 text-[11px] font-bold uppercase tracking-[0.5px] text-[#717784]">
+        <div className="mb-2 text-[11px] font-bold uppercase tracking-[0.5px] text-muted-foreground">
           Tags
         </div>
-        <div className="text-sm text-[#717784]">Loading tags...</div>
+        <div className="text-sm text-muted-foreground">Loading tags...</div>
       </div>
     )
   }
 
   return (
     <div>
-      <div className="mb-2 text-[11px] font-bold uppercase tracking-[0.5px] text-[#717784]">
+      <div className="mb-2 text-[11px] font-bold uppercase tracking-[0.5px] text-muted-foreground">
         Tags
       </div>
       <div className="flex flex-wrap gap-1">
@@ -36,8 +36,8 @@ export function TagsPanel() {
               className={cn(
                 'inline-flex items-center gap-1.5 rounded-[20px] border px-2.5 py-1.5 text-xs transition-colors',
                 isSelected
-                  ? 'border-[#0e121b] bg-[#ebf1ff] text-[#0e121b]'
-                  : 'border-[#e0e4ea] bg-white text-[#2b303b] hover:border-[#cacfd8] hover:bg-[#f9f9f9]'
+                  ? 'border-primary bg-accent text-foreground'
+                  : 'border-border bg-card text-muted-foreground hover:border-border hover:bg-muted'
               )}
             >
               <div className="relative size-3">

@@ -25,13 +25,13 @@ export function NoteListItem({ note, isActive }: NoteListItemProps) {
     <Card
       onClick={handleClick}
       className={cn(
-        'cursor-pointer rounded-md border-2 p-4 transition-all hover:bg-[#f9f9f9]',
+        'cursor-pointer rounded-md border-2 p-4 transition-all hover:bg-muted',
         isActive
-          ? 'border-[#0e121b] bg-[#f3f5f8]'
-          : 'border-[#e0e4ea] bg-white hover:shadow-[2px_2px_0_#e0e4ea]'
+          ? 'border-primary bg-muted'
+          : 'border-border bg-card hover:shadow-md'
       )}
     >
-      <h3 className="mb-2 text-sm font-semibold leading-tight tracking-[-0.3px] text-[#0e121b]">
+      <h3 className="mb-2 text-sm font-semibold leading-tight tracking-[-0.3px] text-foreground">
         {note.title}
       </h3>
       <div className="mb-1.5 flex flex-wrap gap-1">
@@ -39,13 +39,13 @@ export function NoteListItem({ note, isActive }: NoteListItemProps) {
           <Badge
             key={tag}
             variant="secondary"
-            className="rounded-sm border border-[#cacfd8] bg-[#f3f5f8] px-1.5 py-0.5 text-[10px] font-normal leading-none tracking-[-0.2px] text-[#0e121b]"
+            className="rounded-sm border border-border bg-muted px-1.5 py-0.5 text-[10px] font-normal leading-none tracking-[-0.2px] text-foreground"
           >
             {tag}
           </Badge>
         ))}
       </div>
-      <p className="text-[11px] leading-none tracking-[-0.2px] text-[#717784]">
+      <p className="text-[11px] leading-none tracking-[-0.2px] text-muted-foreground">
         {format(new Date(note.updated_at), 'dd MMM yyyy')}
       </p>
     </Card>

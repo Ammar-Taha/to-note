@@ -19,20 +19,19 @@ function NavItem({ icon, label, isActive, onClick }: NavItemProps) {
       className={cn(
         'flex w-full items-center gap-2 rounded-lg border-2 px-3 py-2.5 text-sm font-medium transition-colors',
         isActive
-          ? 'border-[#0e121b] bg-[#f3f5f8]'
-          : 'border-[#e0e4ea] bg-white hover:bg-[#f9f9f9]'
+          ? 'border-primary bg-muted'
+          : 'border-border bg-card hover:bg-muted'
       )}
     >
-      <div className="relative size-5">
+      <div className={cn('relative size-5', isActive ? 'text-foreground' : 'text-muted-foreground')}>
         <Image
           src={icon}
           alt={label}
           fill
           className="object-contain"
-          style={{ color: isActive ? '#0e121b' : '#525866' }}
         />
       </div>
-      <span className={cn(isActive ? 'text-[#0e121b]' : 'text-[#2b303b]')}>
+      <span className={cn(isActive ? 'text-foreground' : 'text-muted-foreground')}>
         {label}
       </span>
     </button>
