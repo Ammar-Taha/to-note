@@ -130,7 +130,7 @@ export function ChangePasswordSettings() {
                 src="/icons/info-circle.svg"
                 alt="Info"
                 fill
-                className="object-contain"
+                className="object-contain dark:invert"
               />
             </div>
             <span>At least 8 characters</span>

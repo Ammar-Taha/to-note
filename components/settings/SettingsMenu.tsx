@@ -54,7 +54,7 @@ export function SettingsMenu() {
               src={item.icon}
               alt={item.label}
               fill
-              className="object-contain"
+              className="object-contain dark:invert"
             />
           </div>
           <span className="flex-1 text-left text-sm font-medium leading-tight tracking-[-0.2px] text-foreground">
@@ -77,7 +77,7 @@ export function SettingsMenu() {
             src="/icons/logout.svg"
             alt="Logout"
             fill
-            className="object-contain"
+            className="object-contain dark:invert"
           />
         </div>
         <span className="text-left text-sm font-medium leading-tight tracking-[-0.2px] text-muted-foreground">

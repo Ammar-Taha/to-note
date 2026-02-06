@@ -149,6 +149,7 @@ export default function SignupPage() {
                 alt="Toggle password visibility"
                 width={20}
                 height={20}
+                className="dark:invert"
               />
             </button>
           </div>
@@ -158,7 +159,7 @@ export default function SignupPage() {
               alt="Info"
               width={16}
               height={16}
-              className="text-muted-foreground"
+              className="text-muted-foreground dark:invert"
             />
             <span className="text-xs text-muted-foreground">
               At least 8 characters
@@ -192,7 +193,7 @@ export default function SignupPage() {
             alt="Google"
             width={18}
             height={18}
-            className="mr-2"
+            className="mr-2 dark:invert"
           />
           <span className="text-base font-medium tracking-[0.5px] leading-4 text-foreground">
             Google

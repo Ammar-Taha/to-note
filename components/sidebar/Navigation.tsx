@@ -28,7 +28,7 @@ function NavItem({ icon, label, isActive, onClick }: NavItemProps) {
           src={icon}
           alt={label}
           fill
-          className="object-contain"
+          className="object-contain dark:invert"
         />
       </div>
       <span className={cn(isActive ? 'text-foreground' : 'text-muted-foreground')}>

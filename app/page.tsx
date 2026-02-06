@@ -134,7 +134,7 @@ function NotesApp() {
                     src="/icons/settings.svg"
                     alt="Settings"
                     fill
-                    className="object-contain"
+                    className="object-contain dark:invert"
                   />
                 </div>
               </button>

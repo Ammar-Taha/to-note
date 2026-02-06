@@ -43,7 +43,7 @@ export function SearchInput({ className }: SearchInputProps) {
           src="/icons/search.svg"
           alt="Search"
           fill
-          className="object-contain"
+          className="object-contain dark:invert"
         />
       </div>
       <Input

@@ -75,7 +75,7 @@ export function NoteEditorHeader() {
             src="/icons/archive-action.svg"
             alt="Archive"
             fill
-            className="object-contain"
+            className="object-contain dark:invert"
           />
         </div>
         {selectedNote.is_archived ? 'Unarchive' : 'Archive'}
@@ -103,7 +103,7 @@ export function NoteEditorHeader() {
               src="/icons/delete.svg"
               alt="Delete"
               fill
-              className="object-contain"
+              className="object-contain dark:invert"
             />
           </div>
           Delete

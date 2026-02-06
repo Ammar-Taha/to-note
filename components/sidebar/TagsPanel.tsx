@@ -45,7 +45,7 @@ export function TagsPanel() {
                   src="/icons/tag.svg"
                   alt=""
                   fill
-                  className="object-contain"
+                  className="object-contain dark:invert"
                 />
               </div>
               <span>{tag}</span>

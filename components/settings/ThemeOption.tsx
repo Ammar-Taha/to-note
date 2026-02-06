@@ -34,7 +34,7 @@ export function ThemeOption({
         }`}
       >
         <div className="relative size-6">
-          <Image src={icon} alt={title} fill className="object-contain" />
+          <Image src={icon} alt={title} fill className="object-contain dark:invert" />
         </div>
       </div>
       <div className="flex-1">

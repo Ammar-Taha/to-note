@@ -34,7 +34,7 @@ export function NoteViewer() {
                     src="/icons/tag.svg"
                     alt="Tags"
                     fill
-                    className="object-contain"
+                    className="object-contain dark:invert"
                   />
                 </div>
                 <span className="text-sm font-medium text-muted-foreground">Tags:</span>
@@ -60,7 +60,7 @@ export function NoteViewer() {
                 src="/icons/clock.svg"
                 alt="Last edited"
                 fill
-                className="object-contain"
+                className="object-contain dark:invert"
               />
             </div>
             <span className="font-medium">Last edited:</span>

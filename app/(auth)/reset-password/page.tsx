@@ -105,6 +105,7 @@ export default function ResetPasswordPage() {
                 alt="Toggle password visibility"
                 width={20}
                 height={20}
+                className="dark:invert"
               />
             </button>
           </div>
@@ -114,7 +115,7 @@ export default function ResetPasswordPage() {
               alt="Info"
               width={16}
               height={16}
-              className="text-muted-foreground"
+              className="text-muted-foreground dark:invert"
             />
             <span className="text-xs text-muted-foreground">
               At least 8 characters
@@ -148,6 +149,7 @@ export default function ResetPasswordPage() {
                 alt="Toggle password visibility"
                 width={20}
                 height={20}
+                className="dark:invert"
               />
             </button>
           </div>

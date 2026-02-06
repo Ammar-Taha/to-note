@@ -140,6 +140,7 @@ export default function LoginPage() {
                 alt="Toggle password visibility"
                 width={20}
                 height={20}
+                className="dark:invert"
               />
             </button>
           </div>
@@ -192,7 +193,7 @@ export default function LoginPage() {
             alt="Google"
             width={18}
             height={18}
-            className="mr-2"
+            className="mr-2 dark:invert"
           />
           <span className="text-base font-medium tracking-[0.5px] leading-4 text-foreground">
             Continue with Google
