@@ -1,65 +1,176 @@
-import Image from "next/image";
+'use client'
+
+import { useMemo } from 'react'
+import Image from 'next/image'
+import { Separator } from '@/components/ui/separator'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { Button } from '@/components/ui/button'
+import { Logo } from '@/components/layout/Logo'
+import { Navigation } from '@/components/sidebar/Navigation'
+import { TagsPanel } from '@/components/sidebar/TagsPanel'
+import { SearchInput } from '@/components/ui/SearchInput'
+import { NoteListItem } from '@/components/notes/NoteListItem'
+import { NoteEditor } from '@/components/notes/NoteEditor'
+import { NoteEditorHeader } from '@/components/notes/NoteEditorHeader'
+import { useNotes } from '@/hooks/use-notes'
+import { useUIStore } from '@/lib/store/ui-store'
+import { ProtectedRoute } from './protected-route'
+import { UserMenu } from '@/components/sidebar/UserMenu'
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <ProtectedRoute>
+      <NotesApp />
+    </ProtectedRoute>
+  )
+}
+
+function NotesApp() {
+  const { data: notes = [], isLoading } = useNotes()
+
+  const selectedNoteId = useUIStore((state) => state.selectedNoteId)
+  const setSelectedNoteId = useUIStore((state) => state.setSelectedNoteId)
+  const viewFilter = useUIStore((state) => state.viewFilter)
+  const searchQuery = useUIStore((state) => state.searchQuery)
+  const selectedTags = useUIStore((state) => state.selectedTags)
+  const clearDraft = useUIStore((state) => state.clearDraft)
+
+  // Filter notes based on view filter, search, and tags
+  const filteredNotes = useMemo(() => {
+    let filtered = notes
+
+    // Filter by archived status
+    filtered = filtered.filter((note) =>
+      viewFilter === 'archived' ? note.is_archived : !note.is_archived
+    )
+
+    // Filter by search query
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase()
+      filtered = filtered.filter(
+        (note) =>
+          note.title.toLowerCase().includes(query) ||
+          note.content.toLowerCase().includes(query) ||
+          note.tags.some((tag) => tag.toLowerCase().includes(query))
+      )
+    }
+
+    // Filter by selected tags
+    if (selectedTags.length > 0) {
+      filtered = filtered.filter((note) =>
+        selectedTags.some((tag) => note.tags.includes(tag))
+      )
+    }
+
+    return filtered
+  }, [notes, viewFilter, searchQuery, selectedTags])
+
+  const handleCreateNew = () => {
+    setSelectedNoteId(null)
+    clearDraft()
+  }
+
+  return (
+    <div className="flex h-screen bg-[#f3f5f8]">
+      {/* Sidebar */}
+      <div className="w-[280px] border-r border-[#e0e4ea] bg-[#fafafa] p-4 flex flex-col">
+        <div className="flex-1">
+          <Logo className="mb-6 border-b-2 border-[#e0e4ea] pb-4" />
+
+          <div className="mb-4">
+            <Navigation />
+          </div>
+
+          <Separator className="my-4 bg-[#e0e4ea]" />
+
+          <TagsPanel />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <UserMenu />
+      </div>
+
+      {/* Main Content */}
+      <div className="flex flex-1 flex-col">
+        {/* Header */}
+        <div className="border-b border-[#e0e4ea] bg-white px-6 py-5">
+          <div className="flex items-center justify-between">
+            <h1 className="text-2xl font-bold leading-tight tracking-[-0.5px] text-[#0e121b]">
+              {viewFilter === 'archived' ? 'Archived Notes' : 'All Notes'}
+            </h1>
+            <div className="flex items-center gap-4">
+              <SearchInput className="w-[450px]" />
+              <button className="flex size-6 items-center justify-center">
+                <div className="relative size-5">
+                  <Image
+                    src="/icons/settings.svg"
+                    alt="Settings"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+              </button>
+            </div>
+          </div>
         </div>
-      </main>
+
+        {/* Two Column Layout */}
+        <div className="grid flex-1 grid-cols-[320px_1fr] overflow-hidden">
+          {/* Notes Panel */}
+          <div className="flex flex-col border-r border-[#e0e4ea]">
+            <div className="border-b-2 border-[#e0e4ea] bg-[#f9f9f9] p-4">
+              <Button
+                onClick={handleCreateNew}
+                className="w-full gap-2 bg-[#0e121b] text-white hover:bg-[#2b303b]"
+              >
+                <span className="text-lg">+</span>
+                Create New Note
+              </Button>
+            </div>
+
+            <ScrollArea className="flex-1 p-4">
+              {isLoading ? (
+                <div className="py-8 text-center text-sm text-[#717784]">
+                  Loading notes...
+                </div>
+              ) : filteredNotes.length === 0 ? (
+                <div className="py-8 text-center text-sm text-[#717784]">
+                  {searchQuery || selectedTags.length > 0
+                    ? 'No notes match your filters'
+                    : 'No notes yet. Create your first note!'}
+                </div>
+              ) : (
+                <div className="space-y-2.5">
+                  {filteredNotes.map((note) => (
+                    <NoteListItem
+                      key={note.id}
+                      note={note}
+                      isActive={note.id === selectedNoteId}
+                    />
+                  ))}
+                </div>
+              )}
+            </ScrollArea>
+          </div>
+
+          {/* Note Workspace */}
+          <div className="flex flex-col">
+            {selectedNoteId !== null || !selectedNoteId ? (
+              <>
+                {selectedNoteId && <NoteEditorHeader />}
+                <NoteEditor />
+              </>
+            ) : (
+              <div className="flex flex-1 items-center justify-center">
+                <div className="text-center">
+                  <p className="text-lg text-[#717784]">
+                    Select a note or create a new one
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
-  );
+  )
 }
