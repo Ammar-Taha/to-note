@@ -1,37 +1,37 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import Image from 'next/image'
-import { useAuth } from '@/components/providers/auth-provider'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Alert, AlertDescription } from '@/components/ui/alert'
-import Link from 'next/link'
+import { useState } from "react";
+import Image from "next/image";
+import { useAuth } from "@/components/providers/auth-provider";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import Link from "next/link";
 
 export default function ForgotPasswordPage() {
-  const [email, setEmail] = useState('')
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const { resetPassword } = useAuth()
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { resetPassword } = useAuth();
 
   const handleResetPassword = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError('')
-    setSuccess(false)
-    setIsLoading(true)
+    e.preventDefault();
+    setError("");
+    setSuccess(false);
+    setIsLoading(true);
 
-    const { error } = await resetPassword(email)
+    const { error } = await resetPassword(email);
 
     if (error) {
-      setError(error.message)
+      setError(error.message);
     } else {
-      setSuccess(true)
+      setSuccess(true);
     }
 
-    setIsLoading(false)
-  }
+    setIsLoading(false);
+  };
 
   return (
     <div className="w-full max-w-[540px] bg-white rounded-[12px] border border-[#e0e4ea] shadow-[0px_8px_12px_rgba(240,240,240,0.6)] p-8 space-y-4">
@@ -55,7 +55,7 @@ export default function ForgotPasswordPage() {
           Forgotten your password?
         </h2>
         <p className="text-sm tracking-[-0.2px] text-[#525866]">
-          Enter your email below, and we'll send you a link to reset it.
+          Enter your email below, and we will send you a link to reset it.
         </p>
       </div>
 
@@ -100,7 +100,7 @@ export default function ForgotPasswordPage() {
           disabled={isLoading || success}
           className="w-full h-12 bg-[#3b82f6] hover:bg-[#3b82f6]/90 text-white rounded-[12px] text-base font-semibold tracking-[-0.3px] leading-[19.2px]"
         >
-          {isLoading ? 'Sending...' : 'Send Reset Link'}
+          {isLoading ? "Sending..." : "Send Reset Link"}
         </Button>
       </form>
 
@@ -114,5 +114,6 @@ export default function ForgotPasswordPage() {
         </Link>
       </div>
     </div>
-  )
+  );
 }
+
