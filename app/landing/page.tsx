@@ -1,24 +1,24 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import Image from 'next/image'
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
-import { Tag, Search, Archive } from 'lucide-react'
-import { useAuth } from '@/components/providers/auth-provider'
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Tag, Search, Archive } from "lucide-react";
+import { useAuth } from "@/components/providers/auth-provider";
 
 export default function LandingPage() {
-  const { user } = useAuth()
-  const router = useRouter()
+  const { user } = useAuth();
+  const router = useRouter();
 
   // Redirect authenticated users to the app
   useEffect(() => {
     if (user) {
-      router.push('/')
+      router.push("/");
     }
-  }, [user, router])
+  }, [user, router]);
   return (
     <div className="min-h-screen bg-[#f3f5f8]">
       {/* Hero Section */}
@@ -87,8 +87,8 @@ export default function LandingPage() {
                 Smart Tags
               </h4>
               <p className="text-[#525866] leading-relaxed">
-                Organize your notes with flexible tags. Filter and find what you need
-                in seconds.
+                Organize your notes with flexible tags. Filter and find what you
+                need in seconds.
               </p>
             </CardContent>
           </Card>
@@ -104,7 +104,7 @@ export default function LandingPage() {
               </h4>
               <p className="text-[#525866] leading-relaxed">
                 Lightning-fast search across all your notes. Find exactly what
-                you're looking for.
+                you&apos;re looking for.
               </p>
             </CardContent>
           </Card>
@@ -134,7 +134,7 @@ export default function LandingPage() {
             Ready to get organized?
           </h3>
           <p className="text-lg text-[#525866] mb-8">
-            Join thousands of users who've simplified their note-taking.
+            Join thousands of users who&apos;ve simplified their note-taking.
           </p>
           <Link href="/signup">
             <Button className="h-14 px-12 bg-[#3b82f6] hover:bg-[#3b82f6]/90 text-white rounded-[12px] text-lg font-semibold tracking-[-0.3px] shadow-lg">
@@ -147,7 +147,7 @@ export default function LandingPage() {
       {/* Footer */}
       <div className="max-w-4xl mx-auto px-6 py-8 border-t border-[#e0e4ea]">
         <p className="text-center text-sm text-[#525866]">
-          Already have an account?{' '}
+          Already have an account?{" "}
           <Link
             href="/login"
             className="text-[#0e121b] font-medium hover:underline"
@@ -157,9 +157,5 @@ export default function LandingPage() {
         </p>
       </div>
     </div>
-  )
+  );
 }
-
-
-
-

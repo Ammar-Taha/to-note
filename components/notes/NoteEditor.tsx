@@ -28,13 +28,11 @@ export function NoteEditor() {
 
   const isNewNote = !selectedNoteId
 
-  // Sync tagInputs with draftTags when note is loaded
+  // Sync tagInputs with draftTags when note is loaded (deferred to avoid cascading renders)
   useEffect(() => {
-    if (draftTags.length > 0) {
-      setTagInputs(draftTags)
-    } else {
-      setTagInputs([''])
-    }
+    const next = draftTags.length > 0 ? draftTags : ['']
+    const id = setTimeout(() => setTagInputs(next), 0)
+    return () => clearTimeout(id)
   }, [selectedNoteId, draftTags])
 
   const handleSave = async () => {
