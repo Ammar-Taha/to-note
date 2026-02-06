@@ -1,0 +1,144 @@
+/* Tiptap Editor Styles */
+
+.tiptap-editor {
+  @apply w-full;
+}
+
+/* Editor content area */
+.tiptap-editor .ProseMirror {
+  @apply min-h-[400px] resize-y text-sm leading-relaxed tracking-[-0.2px] text-(--color-foreground);
+}
+
+.tiptap-editor .ProseMirror:focus {
+  @apply outline-none;
+}
+
+/* Placeholder */
+.tiptap-editor .ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  @apply pointer-events-none float-left h-0 text-(--color-muted-foreground);
+}
+
+/* Prose styling for rich text content */
+.tiptap-editor .prose {
+  @apply max-w-none;
+}
+
+.tiptap-editor .prose h1 {
+  @apply mb-4 mt-6 text-3xl font-bold;
+}
+
+.tiptap-editor .prose h2 {
+  @apply mb-3 mt-5 text-2xl font-bold;
+}
+
+.tiptap-editor .prose h3 {
+  @apply mb-3 mt-4 text-xl font-semibold;
+}
+
+.tiptap-editor .prose p {
+  @apply my-3;
+}
+
+.tiptap-editor .prose ul,
+.tiptap-editor .prose ol {
+  @apply my-3 pl-6;
+}
+
+.tiptap-editor .prose ul {
+  @apply list-disc;
+}
+
+.tiptap-editor .prose ol {
+  @apply list-decimal;
+}
+
+.tiptap-editor .prose li {
+  @apply my-1;
+}
+
+.tiptap-editor .prose blockquote {
+  @apply my-4 border-l-4 border-(--color-border) pl-4 italic text-(--color-muted-foreground);
+}
+
+.tiptap-editor .prose code {
+  @apply rounded bg-(--color-muted) px-1.5 py-0.5 font-mono text-sm;
+}
+
+.tiptap-editor .prose pre {
+  @apply my-4 overflow-x-auto rounded-md bg-(--color-muted) p-4;
+}
+
+.tiptap-editor .prose pre code {
+  @apply bg-transparent p-0;
+}
+
+.tiptap-editor .prose hr {
+  @apply my-6 border-t-2 border-(--color-border);
+}
+
+.tiptap-editor .prose img {
+  @apply my-4 max-w-full rounded-md;
+}
+
+.tiptap-editor .prose a {
+  @apply text-blue-600 underline hover:text-blue-800;
+}
+
+/* Task list styles */
+.tiptap-editor .prose ul[data-type='taskList'] {
+  @apply list-none pl-0;
+}
+
+.tiptap-editor .prose ul[data-type='taskList'] li {
+  @apply flex items-start gap-2;
+}
+
+.tiptap-editor .prose ul[data-type='taskList'] li > label {
+  @apply flex items-center gap-2;
+}
+
+.tiptap-editor .prose ul[data-type='taskList'] li > label > input {
+  @apply mt-1 size-4 cursor-pointer rounded border-(--color-border);
+}
+
+.tiptap-editor .prose ul[data-type='taskList'] li > div {
+  @apply flex-1;
+}
+
+/* Table styles */
+.tiptap-editor .prose table {
+  @apply my-4 w-full border-collapse;
+}
+
+.tiptap-editor .prose table td,
+.tiptap-editor .prose table th {
+  @apply border border-(--color-border) px-3 py-2;
+}
+
+.tiptap-editor .prose table th {
+  @apply bg-(--color-muted) font-bold text-left;
+}
+
+.tiptap-editor .prose table tr:hover {
+  @apply bg-(--color-muted)/50;
+}
+
+/* Selected cell highlighting */
+.tiptap-editor .prose table .selectedCell {
+  @apply bg-blue-100;
+}
+
+/* Focus styles */
+.tiptap-editor .ProseMirror-focused {
+  @apply outline-none;
+}
+
+/* Ensure proper spacing */
+.tiptap-editor .prose > *:first-child {
+  @apply mt-0;
+}
+
+.tiptap-editor .prose > *:last-child {
+  @apply mb-0;
+}

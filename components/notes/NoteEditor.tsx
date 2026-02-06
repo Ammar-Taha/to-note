@@ -3,11 +3,11 @@
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import { useUIStore } from '@/lib/store/ui-store'
 import { useUpdateNote, useCreateNote } from '@/hooks/use-notes'
 import { Plus, X } from 'lucide-react'
+import { RichTextEditor } from './RichTextEditor'
 
 export function NoteEditor() {
   const selectedNoteId = useUIStore((state) => state.selectedNoteId)
@@ -181,11 +181,10 @@ export function NoteEditor() {
           )}
         </div>
 
-        <Textarea
+        <RichTextEditor
+          content={draftContent}
+          onChange={setDraftContent}
           placeholder="Start writing..."
-          value={draftContent}
-          onChange={(e) => setDraftContent(e.target.value)}
-          className="min-h-[400px] resize-y border-2 border-dashed border-[#e0e4ea] text-sm leading-relaxed tracking-[-0.2px] placeholder:text-[#cacfd8] focus-visible:border-[#0e121b]"
         />
       </div>
 
