@@ -27,8 +27,19 @@ const pacifico = Pacifico({
 });
 
 export const metadata: Metadata = {
-  title: "Notes - Your Personal Note Taking App",
-  description: "A modern note-taking application built with Next.js",
+  title: "ToNote - Your Personal Note Taking App",
+  description: "A modern, minimal note-taking app that helps you capture ideas, organize with tags, and find what matters—instantly.",
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png' },
+    ],
+  },
+  manifest: '/site.webmanifest',
 };
 
 export default function RootLayout({

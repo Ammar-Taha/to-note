@@ -27,13 +27,13 @@ export default function LandingPage() {
         <div className="flex items-center justify-center gap-2.5 mb-12">
           <Image
             src="/assets/feather-logo.svg"
-            alt="Notes"
+            alt="ToNote"
             width={40}
             height={40}
             className="text-[#3b82f6]"
           />
           <h1 className="font-[family-name:var(--font-pacifico)] text-[32px] leading-none tracking-[-0.64px] text-[#0e121b]">
-            Notes
+            ToNote
           </h1>
         </div>
 
@@ -86,7 +86,7 @@ export default function LandingPage() {
                 Smart Tags
               </h4>
               <p className="text-[#525866] leading-relaxed">
-                Organize notes with flexible tags. Filter and find what you need
+                Organize your notes with flexible tags. Filter and find what you need
                 in seconds.
               </p>
             </CardContent>

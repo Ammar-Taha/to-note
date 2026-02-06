@@ -11,13 +11,13 @@ export function Logo({ className }: LogoProps) {
       <div className="relative size-7">
         <Image
           src="/icons/logo-feather.svg"
-          alt="Notes"
+          alt="ToNote"
           fill
           className="object-contain"
         />
       </div>
       <span className="font-['Pacifico'] text-[23px] leading-none tracking-[-0.46px]">
-        Notes
+        ToNote
       </span>
     </div>
   )

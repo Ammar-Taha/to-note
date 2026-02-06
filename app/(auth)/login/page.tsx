@@ -57,20 +57,20 @@ export default function LoginPage() {
       <div className="flex items-center justify-center gap-2.5">
         <Image
           src="/assets/feather-logo.svg"
-          alt="Notes"
+          alt="ToNote"
           width={28}
           height={28}
           className="text-[#3b82f6]"
         />
         <h1 className="font-[family-name:var(--font-pacifico)] text-[23px] leading-none tracking-[-0.46px] text-[#0e121b]">
-          Notes
+          ToNote
         </h1>
       </div>
 
       {/* Header */}
       <div className="space-y-2 text-center">
         <h2 className="text-2xl font-bold tracking-[-0.5px] leading-[28.8px] text-[#0e121b]">
-          Welcome to Note
+          Welcome to ToNote
         </h2>
         <p className="text-sm tracking-[-0.2px] text-[#525866]">
           Please log in to continue

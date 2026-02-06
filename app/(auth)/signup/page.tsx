@@ -66,13 +66,13 @@ export default function SignupPage() {
       <div className="flex items-center justify-center gap-2.5">
         <Image
           src="/assets/feather-logo.svg"
-          alt="Notes"
+          alt="ToNote"
           width={28}
           height={28}
           className="text-[#3b82f6]"
         />
         <h1 className="font-[family-name:var(--font-pacifico)] text-[23px] leading-none tracking-[-0.46px] text-[#0e121b]">
-          Notes
+          ToNote
         </h1>
       </div>
 
