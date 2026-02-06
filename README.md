@@ -1,203 +1,225 @@
-# ToNote - Note Taking App
+# ToNote
 
-A modern, feature-rich note-taking application built with Next.js 16, Supabase, and shadcn/ui.
+<div align="center">
+
+![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js) ![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react) ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript) ![Supabase](https://img.shields.io/badge/Supabase-Auth%20%26%20DB-3ECF8E?style=flat-square&logo=supabase) ![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-06B6D4?style=flat-square&logo=tailwindcss) ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
+
+**A modern, minimal note-taking app that helps you capture ideas, organize with tags, and find what matters—instantly.**
+
+[Introduction](#introduction) • [Features](#features) • [Getting Started](#getting-started) • [Project Structure](#project-structure) • [Tech Stack](#tech-stack) • [Contributing](#contributing)
+
+</div>
+
+---
+
+## Introduction
+
+**ToNote** is a full-featured note-taking application built with the Next.js 16 App Router, Supabase for authentication and database, and a rich editing experience powered by TipTap. It offers a clean two-column layout, tag-based organization, search, archive, and theme support—all with real-time updates and a responsive UI.
+
+### Why ToNote?
+
+- **Secure & personal** — Supabase Auth (email/password, Google, magic link) with Row Level Security so notes stay private.
+- **Rich editing** — TipTap editor with formatting, links, images, tables, and task lists.
+- **Organized** — Tags, archive, and full-text search across title, content, and tags.
+- **Pleasant to use** — Light/dark theme, font choices (sans/mono/serif), and a minimal interface.
+
+---
 
 ## Features
 
-- ✅ Create, read, update, and delete notes
-- ✅ Archive/unarchive notes
-- ✅ Tag-based organization
-- ✅ Search notes by title, content, or tags
-- ✅ Filter by tags
-- ✅ Real-time updates with TanStack Query
-- ✅ Responsive design with Tailwind CSS v4
-- ✅ Client state management with Zustand
-- ✅ Server state management with TanStack Query
+| Feature | Description |
+|--------|-------------|
+| **Notes CRUD** | Create, read, update, and delete notes with title, rich content, and tags. |
+| **Archive** | Archive and unarchive notes; filter view by All Notes or Archived. |
+| **Tags** | Add tags to notes; filter by one or multiple tags in the sidebar. |
+| **Search** | Search by title, content, or tags with live filtering. |
+| **Rich text** | TipTap editor: bold, italic, lists, links, images, tables, task lists. |
+| **Auth** | Email/password, Google sign-in, magic link (OTP), forgot/reset password. |
+| **Settings** | Color theme (light/dark/system), font family, change password. |
+| **Real-time** | TanStack Query for caching, refetching, and optimistic updates. |
+| **State** | Zustand for UI state; TanStack Query for server state. |
 
-## Tech Stack
-
-- **Framework:** Next.js 16 (App Router)
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS v4
-- **UI Components:** shadcn/ui
-- **Database:** Supabase
-- **State Management:**
-  - Zustand (UI/client state)
-  - TanStack Query (server state)
-- **Package Manager:** pnpm
+---
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js 20+
-- pnpm
-- Supabase account
+| Requirement | Details |
+|-------------|---------|
+| [Node.js](https://nodejs.org/) | 20+ |
+| [pnpm](https://pnpm.io/) | Package manager |
+| [Supabase](https://supabase.com) | Account for auth and database |
 
-### 1. Install Dependencies
+### Installation
+
+1. **Clone and install dependencies**
 
 ```bash
+git clone <your-repo-url>
+cd "ToNote - Note Taking"
 pnpm install
 ```
 
-### 2. Set Up Supabase
+2. **Set up Supabase**
 
-1. Create a new Supabase project at [supabase.com](https://supabase.com)
-2. Run the following SQL in the Supabase SQL Editor to create the notes table:
+- Create a project at [supabase.com](https://supabase.com).
+- In the SQL Editor, run the schema from `supabase/schema.sql` (creates `notes` table, indexes, RLS policies, and triggers).
 
-```sql
--- Create notes table
-CREATE TABLE notes (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  title TEXT NOT NULL,
-  content TEXT DEFAULT '',
-  tags TEXT[] DEFAULT '{}',
-  is_archived BOOLEAN DEFAULT false,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-  user_id TEXT NOT NULL
-);
+3. **Configure environment**
 
--- Create index for better query performance
-CREATE INDEX idx_notes_user_id ON notes(user_id);
-CREATE INDEX idx_notes_updated_at ON notes(updated_at DESC);
-CREATE INDEX idx_notes_is_archived ON notes(is_archived);
+Copy the example env and add your Supabase keys:
 
--- Enable Row Level Security (RLS)
-ALTER TABLE notes ENABLE ROW LEVEL SECURITY;
-
--- Create a policy for development (adjust for production)
-CREATE POLICY "Allow all operations for development" ON notes
-  FOR ALL
-  USING (true)
-  WITH CHECK (true);
+```bash
+cp .env.example .env.local
 ```
 
-### 3. Configure Environment Variables
-
-Create a `.env.local` file in the root directory:
+Edit `.env.local`:
 
 ```env
-NEXT_PUBLIC_SUPABASE_URL=your-supabase-project-url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
-Get these values from your Supabase project settings under "API".
+Get these from your Supabase project: **Settings → API**.
 
-### 4. Run Development Server
+4. **Run the development server**
 
 ```bash
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000). Use the auth pages to sign up or log in, then start creating notes.
+
+### Build for production
+
+```bash
+pnpm build
+pnpm start
+```
+
+---
 
 ## Project Structure
 
 ```
-├── app/ # Next.js App Router
-│ ├── layout.tsx # Root layout with providers
-│ ├── page.tsx # Main notes page
-│ └── globals.css # Global styles
+├── app/
+│   ├── (auth)/                 # Auth route group
+│   │   ├── forgot-password/
+│   │   ├── login/
+│   │   ├── otp-login/
+│   │   ├── reset-password/
+│   │   ├── signup/
+│   │   └── layout.tsx
+│   ├── auth/callback/          # OAuth callback
+│   ├── landing/                # Landing page
+│   ├── layout.tsx              # Root layout (fonts, providers)
+│   ├── page.tsx                # Main notes app (protected)
+│   ├── protected-route.tsx    # Auth guard
+│   └── globals.css
 ├── components/
-│ ├── layout/ # Layout components (Logo, Header)
-│ ├── notes/ # Note-specific components
-│ ├── sidebar/ # Sidebar components
-│ ├── ui/ # shadcn UI components
-│ └── providers/ # React Query provider
-├── hooks/ # Custom React hooks
-│ └── use-notes.ts # TanStack Query hooks for notes
+│   ├── layout/                 # Logo, Header
+│   ├── notes/                  # NoteEditor, NoteViewer, NoteListItem, RichTextEditor
+│   ├── providers/              # AuthProvider, QueryProvider, ThemeProvider
+│   ├── settings/               # SettingsDialog, theme/font/password settings
+│   ├── sidebar/                # Navigation, TagsPanel, UserMenu
+│   └── ui/                     # shadcn/ui + custom (SearchInput, otp-input)
+├── hooks/
+│   └── use-notes.ts            # TanStack Query hooks for notes API
 ├── lib/
-│ ├── api/ # API client functions
-│ ├── store/ # Zustand stores
-│ ├── supabase.ts # Supabase client
-│ └── utils.ts # Utility functions
-├── types/ # TypeScript types
-│ ├── database.types.ts # Supabase database types
-│ └── index.ts # Application types
-└── public/
-└── icons/ # SVG icons
+│   ├── api/notes.ts            # Notes CRUD (Supabase client)
+│   ├── store/ui-store.ts       # Zustand UI state
+│   ├── supabase/               # Browser & server Supabase clients
+│   └── utils.ts
+├── types/
+│   ├── database.types.ts       # Supabase-generated types
+│   └── index.ts               # Note, NoteFormData, ViewFilter, UIState
+├── supabase/
+│   ├── schema.sql             # Full DB schema (notes, RLS, triggers)
+│   └── email-templates/       # Auth email templates
+├── public/                     # Favicons, icons, assets
+├── middleware.ts              # Supabase session refresh
+└── next.config.ts
 ```
 
-## Key Components
+---
 
-### State Management
+## Tech Stack
 
-- **Zustand Store** (`lib/store/ui-store.ts`): Manages UI state including:
-  - Selected note
-  - View filter (all/archived)
-  - Search query
-  - Selected tags
-  - Draft note content
+| Layer | Technology |
+|-------|------------|
+| **Framework** | Next.js 16 (App Router) |
+| **Language** | TypeScript 5 |
+| **UI** | React 19, Radix UI, Tailwind CSS v4, shadcn/ui |
+| **Backend** | Supabase (PostgreSQL, Auth, RLS) |
+| **Rich text** | TipTap (Starter Kit, tables, task lists, links, images) |
+| **State** | Zustand (UI), TanStack Query (server) |
+| **Package manager** | pnpm |
 
-- **TanStack Query** (`hooks/use-notes.ts`): Manages server state with:
-  - Automatic caching
-  - Background refetching
-  - Optimistic updates
-  - Loading and error states
+---
 
-### Data Layer
+## Key Modules
 
-- **Supabase Client** (`lib/supabase.ts`): PostgreSQL database with real-time capabilities
-- **API Functions** (`lib/api/notes.ts`): CRUD operations for notes
+| Module | Purpose |
+|--------|---------|
+| `app/page.tsx` | Main notes view: sidebar, list, editor/viewer, filters. |
+| `app/protected-route.tsx` | Wraps app and redirects unauthenticated users. |
+| `components/providers/auth-provider.tsx` | Auth context (user, signIn, signOut, signInWithGoogle, etc.). |
+| `hooks/use-notes.ts` | TanStack Query: notes list, create, update, delete, archive. |
+| `lib/store/ui-store.ts` | Selected note, view filter, search, selected tags, edit mode, settings. |
+| `lib/api/notes.ts` | Notes API using Supabase client (scoped by `user_id`). |
+| `lib/supabase/client.ts` | Browser Supabase client (`@supabase/ssr`). |
+| `middleware.ts` | Refreshes Supabase session for Server Components. |
+| `supabase/schema.sql` | Notes table, indexes, RLS policies, `updated_at` trigger. |
 
-## Features Breakdown
+---
 
-### Note Management
+## Configuration
 
-- Create new notes with title, content, and tags
-- Edit existing notes
-- Delete notes with confirmation
-- Archive/unarchive notes
+### Environment variables
 
-### Filtering & Search
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `NEXT_PUBLIC_SUPABASE_URL` | Yes | Supabase project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Yes | Supabase anonymous (public) key |
 
-- Filter by view (All Notes / Archived Notes)
-- Search across title, content, and tags
-- Multi-select tag filtering
-- Combined filters work together
+### Adding shadcn components
 
-### UI/UX
+```bash
+npx -y shadcn@latest add <component-name>
+```
 
-- Two-column layout (notes list + editor)
-- Responsive design
-- Real-time tag updates
-- Auto-save indicators
-- Empty states for no notes/no results
+---
 
 ## Development Notes
 
-### Adding New Features
+1. **Database** — Prefer changing `supabase/schema.sql` and re-running in SQL Editor; keep `types/database.types.ts` in sync (Supabase CLI or manual).
+2. **Auth** — All note operations use the authenticated user's `id`; RLS enforces per-user access.
+3. **Adding features** — Extend types → API → hooks → UI; add UI state in `ui-store` if needed.
 
-1. **Database Changes**: Update the Supabase schema first
-2. **Types**: Update `types/database.types.ts` and `types/index.ts`
-3. **API Layer**: Add functions to `lib/api/notes.ts`
-4. **Hooks**: Create TanStack Query hooks in `hooks/`
-5. **Components**: Build UI components
-6. **State**: Add to Zustand store if needed
+---
 
-### shadcn Components
+## Production Checklist
 
-To add new shadcn components:
+- [ ] Configure production Supabase project and env vars.
+- [ ] RLS policies are already in `schema.sql`; verify they match your security rules.
+- [ ] Consider pagination or virtualized list for very large note counts.
+- [ ] Set up error boundaries and user-facing error messages where needed.
 
-```bash
-npx -y shadcn@latest add [component-name]
-```
-
-## Production Deployment
-
-### Important Steps
-
-1. **Authentication**: Replace `temp-user-id` in `lib/api/notes.ts` with actual authentication
-2. **RLS Policies**: Update Supabase Row Level Security policies for production
-3. **Environment Variables**: Set up production environment variables
-4. **Error Handling**: Add proper error boundaries and user feedback
-5. **Performance**: Consider pagination for large note collections
+---
 
 ## License
 
 MIT
 
+---
+
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome. Please open an issue or submit a pull request.
+
+<div align="center">
+
+**[⬆ Back to top](#tonote)**
+
+</div>
