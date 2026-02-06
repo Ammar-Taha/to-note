@@ -14,11 +14,15 @@ import { ChangePasswordSettings } from './ChangePasswordSettings'
 
 export function SettingsDialog() {
   const isOpen = useUIStore((state) => state.isSettingsOpen)
+  const openSettings = useUIStore((state) => state.openSettings)
   const closeSettings = useUIStore((state) => state.closeSettings)
   const activeSection = useUIStore((state) => state.activeSettingSection)
 
   return (
-    <Dialog open={isOpen} onOpenChange={closeSettings}>
+    <Dialog
+      open={isOpen}
+      onOpenChange={(open) => (open ? openSettings() : closeSettings())}
+    >
       <DialogContent className="max-w-[850px] gap-0 p-0">
         <DialogHeader className="sr-only">
           <DialogTitle>Settings</DialogTitle>
