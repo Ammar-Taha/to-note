@@ -18,6 +18,12 @@ interface AuthContextType {
     password: string
   ) => Promise<{ error: AuthError | null }>
   signInWithGoogle: () => Promise<{ error: AuthError | null }>
+  signInWithOtp: (email: string) => Promise<{ error: AuthError | null }>
+  verifyOtp: (
+    email: string,
+    token: string
+  ) => Promise<{ error: AuthError | null }>
+  resendOtp: (email: string) => Promise<{ error: AuthError | null }>
   signOut: () => Promise<void>
   resetPassword: (email: string) => Promise<{ error: AuthError | null }>
   updatePassword: (
@@ -91,6 +97,43 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return { error }
   }
 
+  const signInWithOtp = async (email: string) => {
+    const { error } = await supabase.auth.signInWithOtp({
+      email,
+      options: {
+        emailRedirectTo: 'https://to-note.vercel.app/auth/callback',
+      },
+    })
+
+    return { error }
+  }
+
+  const verifyOtp = async (email: string, token: string) => {
+    const { error } = await supabase.auth.verifyOtp({
+      email,
+      token,
+      type: 'email',
+    })
+
+    if (!error) {
+      router.push('/')
+      router.refresh()
+    }
+
+    return { error }
+  }
+
+  const resendOtp = async (email: string) => {
+    const { error } = await supabase.auth.signInWithOtp({
+      email,
+      options: {
+        emailRedirectTo: 'https://to-note.vercel.app/auth/callback',
+      },
+    })
+
+    return { error }
+  }
+
   const signOut = async () => {
     await supabase.auth.signOut()
     router.push('/login')
@@ -125,6 +168,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     signIn,
     signUp,
     signInWithGoogle,
+    signInWithOtp,
+    verifyOtp,
+    resendOtp,
     signOut,
     resetPassword,
     updatePassword,

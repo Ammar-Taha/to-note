@@ -11,6 +11,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Separator } from '@/components/ui/separator'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
+import { Mail } from 'lucide-react'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -153,11 +154,33 @@ export default function LoginPage() {
         </Button>
       </form>
 
-      {/* Divider with Google OAuth */}
-      <div className="space-y-4 pt-4 border-t border-[#e0e4ea]">
-        <p className="text-sm text-center tracking-[-0.2px] text-[#525866]">
-          Or log in with:
-        </p>
+      {/* Divider */}
+      <div className="relative">
+        <div className="absolute inset-0 flex items-center">
+          <div className="w-full border-t border-[#e0e4ea]"></div>
+        </div>
+        <div className="relative flex justify-center text-xs uppercase">
+          <span className="bg-white px-2 text-[#717784]">or continue with</span>
+        </div>
+      </div>
+
+      {/* Alternative Login Methods */}
+      <div className="space-y-3">
+        {/* Email OTP */}
+        <Link href="/otp-login">
+          <Button
+            type="button"
+            variant="outline"
+            className="w-full h-12 rounded-[12px] border-2 border-[#3b82f6] bg-[#f0f7ff] hover:bg-[#e0f0ff] text-[#3b82f6]"
+          >
+            <Mail className="w-5 h-5 mr-2" />
+            <span className="text-base font-semibold tracking-[-0.3px]">
+              Sign in with Email Code
+            </span>
+          </Button>
+        </Link>
+
+        {/* Google OAuth */}
         <Button
           type="button"
           variant="outline"
@@ -172,7 +195,7 @@ export default function LoginPage() {
             className="mr-2"
           />
           <span className="text-base font-medium tracking-[0.5px] leading-4 text-[#0e121b]">
-            Google
+            Continue with Google
           </span>
         </Button>
       </div>
