@@ -2,10 +2,12 @@
 
 import { useMemo, useEffect } from 'react'
 import Image from 'next/image'
+import { Separator } from '@/components/ui/separator'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Button } from '@/components/ui/button'
 import { Logo } from '@/components/layout/Logo'
 import { Navigation } from '@/components/sidebar/Navigation'
+import { TagsPanel } from '@/components/sidebar/TagsPanel'
 import { SearchInput } from '@/components/ui/SearchInput'
 import { NoteListItem } from '@/components/notes/NoteListItem'
 import { NoteEditor } from '@/components/notes/NoteEditor'
@@ -96,6 +98,10 @@ function NotesApp() {
           <div className="mb-4">
             <Navigation />
           </div>
+
+          <Separator className="my-4 bg-[#e0e4ea]" />
+
+          <TagsPanel />
         </div>
 
         <UserMenu />
