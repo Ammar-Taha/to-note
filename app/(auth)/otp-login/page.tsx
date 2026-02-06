@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter, useSearchParams } from 'next/navigation'
@@ -14,7 +14,7 @@ import { Mail, ArrowLeft, Check } from 'lucide-react'
 
 type Step = 'email' | 'verify' | 'success'
 
-export default function OtpLoginPage() {
+function OtpLoginContent() {
   const searchParams = useSearchParams()
   const initialEmail = searchParams.get('email') || ''
   
@@ -296,5 +296,32 @@ export default function OtpLoginPage() {
         </p>
       </div>
     </div>
+  )
+}
+
+export default function OtpLoginPage() {
+  return (
+    <Suspense fallback={
+      <div className="w-full max-w-[540px] bg-white rounded-[12px] border border-[#e0e4ea] shadow-[0px_8px_12px_rgba(240,240,240,0.6)] p-8">
+        <div className="flex items-center justify-center gap-2.5 mb-6">
+          <Image
+            src="/assets/tonote-logo.png"
+            alt="ToNote"
+            width={28}
+            height={28}
+            className="object-contain"
+            unoptimized
+          />
+          <h1 className="font-[family-name:var(--font-pacifico)] text-[23px] leading-none tracking-[-0.46px] text-[#0e121b]">
+            ToNote
+          </h1>
+        </div>
+        <div className="flex justify-center py-12">
+          <div className="w-8 h-8 border-4 border-[#3b82f6] border-t-transparent rounded-full animate-spin" />
+        </div>
+      </div>
+    }>
+      <OtpLoginContent />
+    </Suspense>
   )
 }
