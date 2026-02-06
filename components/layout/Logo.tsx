@@ -10,10 +10,12 @@ export function Logo({ className }: LogoProps) {
     <div className={cn('flex items-center gap-2.5', className)}>
       <div className="relative size-7">
         <Image
-          src="/assets/tonote-logo.png"
+          src="/tonote.png"
           alt="ToNote"
           fill
+          sizes="28px"
           className="object-contain"
+          unoptimized
         />
       </div>
       <span className="font-['Pacifico'] text-[23px] leading-none tracking-[-0.46px]">
@@ -22,3 +24,5 @@ export function Logo({ className }: LogoProps) {
     </div>
   )
 }
+
+

@@ -56,11 +56,12 @@ export default function LoginPage() {
       {/* Logo */}
       <div className="flex items-center justify-center gap-2.5">
         <Image
-          src="/assets/tonote-logo.png"
+          src="/tonote.png"
           alt="ToNote"
           width={28}
           height={28}
           className="object-contain"
+          unoptimized
         />
         <h1 className="font-[family-name:var(--font-pacifico)] text-[23px] leading-none tracking-[-0.46px] text-[#0e121b]">
           ToNote
@@ -191,5 +192,7 @@ export default function LoginPage() {
     </div>
   )
 }
+
+
 
 
