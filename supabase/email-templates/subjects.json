@@ -1,0 +1,8 @@
+{
+  "confirm_signup": "Welcome to ToNote! Confirm your email",
+  "magic_link": "Your ToNote Magic Link",
+  "reset_password": "Reset your ToNote password",
+  "invite_user": "You've been invited to ToNote",
+  "change_email": "Confirm your new email address",
+  "reauthentication": "ToNote verification code"
+}
