@@ -42,14 +42,21 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   // Apply font theme
   useEffect(() => {
     const root = document.documentElement
-    root.classList.remove('font-sans', 'font-serif', 'font-mono')
-    
+    const body = document.body
+    const classes = ['font-sans', 'font-serif', 'font-mono']
+
+    root.classList.remove(...classes)
+    body.classList.remove(...classes)
+
     if (fontTheme === 'serif') {
       root.classList.add('font-serif')
+      body.classList.add('font-serif')
     } else if (fontTheme === 'mono') {
       root.classList.add('font-mono')
+      body.classList.add('font-mono')
     } else {
       root.classList.add('font-sans')
+      body.classList.add('font-sans')
     }
   }, [fontTheme])
 
