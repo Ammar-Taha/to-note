@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/client'
 import type { Note, NoteFormData } from '@/types'
+import type { Database } from '@/types/database.types'
 
 export const notesApi = {
   // Fetch all notes for the authenticated user
@@ -39,12 +40,15 @@ export const notesApi = {
 
     const supabase = createClient()
     
+    const insertData: Database['public']['Tables']['notes']['Insert'] = {
+      ...noteData,
+      user_id: userId,
+    }
+    
     const { data, error } = await supabase
       .from('notes')
-      .insert({
-        ...noteData,
-        user_id: userId,
-      } as any)
+      // @ts-expect-error - Supabase TypeScript SDK has strict type inference limitations with Database generics
+      .insert(insertData)
       .select()
       .single()
 
@@ -64,19 +68,19 @@ export const notesApi = {
 
     const supabase = createClient()
     
-    const updateData: any = {
+    const updateData: Database['public']['Tables']['notes']['Update'] = {
       ...noteData,
       updated_at: new Date().toISOString(),
     }
     
-    const { data, error } = await (supabase
+    const { data, error } = await supabase
       .from('notes')
-      // @ts-ignore - Supabase type inference issue with dynamic updates
+      // @ts-expect-error - Supabase TypeScript SDK has strict type inference limitations with Database generics
       .update(updateData)
       .eq('id', id)
       .eq('user_id', userId)
       .select()
-      .single())
+      .single()
 
     if (error) throw error
     return data as Note
@@ -94,19 +98,19 @@ export const notesApi = {
 
     const supabase = createClient()
     
-    const updateData: any = {
+    const updateData: Database['public']['Tables']['notes']['Update'] = {
       is_archived: isArchived,
       updated_at: new Date().toISOString(),
     }
     
-    const { data, error } = await (supabase
+    const { data, error } = await supabase
       .from('notes')
-      // @ts-ignore - Supabase type inference issue with dynamic updates
+      // @ts-expect-error - Supabase TypeScript SDK has strict type inference limitations with Database generics
       .update(updateData)
       .eq('id', id)
       .eq('user_id', userId)
       .select()
-      .single())
+      .single()
 
     if (error) throw error
     return data as Note
@@ -140,7 +144,7 @@ export const notesApi = {
 
     if (error) throw error
 
-    const allTags: string[] = (data as any)?.flatMap((note: any) => note.tags || []) || []
+    const allTags: string[] = (data as { tags: string[] }[])?.flatMap((note) => note.tags || []) || []
     return Array.from(new Set(allTags)).sort()
   },
 }
