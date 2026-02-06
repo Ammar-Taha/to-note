@@ -23,7 +23,7 @@ export function SettingsDialog() {
       open={isOpen}
       onOpenChange={(open) => (open ? openSettings() : closeSettings())}
     >
-      <DialogContent className="max-w-[850px] gap-0 p-0">
+      <DialogContent className="max-w-[1700px] gap-0 p-0">
         <DialogHeader className="sr-only">
           <DialogTitle>Settings</DialogTitle>
         </DialogHeader>
