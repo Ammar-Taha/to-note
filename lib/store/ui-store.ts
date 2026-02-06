@@ -6,6 +6,10 @@ interface UIStore {
   selectedNoteId: string | null
   setSelectedNoteId: (id: string | null) => void
   
+  // Edit mode
+  isEditing: boolean
+  setIsEditing: (isEditing: boolean) => void
+  
   // View filter (all/archived)
   viewFilter: ViewFilter
   setViewFilter: (filter: ViewFilter) => void
@@ -38,6 +42,10 @@ export const useUIStore = create<UIStore>((set) => ({
   // Selected note
   selectedNoteId: null,
   setSelectedNoteId: (id) => set({ selectedNoteId: id }),
+  
+  // Edit mode
+  isEditing: false,
+  setIsEditing: (isEditing) => set({ isEditing }),
   
   // View filter
   viewFilter: 'all',

@@ -14,11 +14,11 @@ interface NoteListItemProps {
 
 export function NoteListItem({ note, isActive }: NoteListItemProps) {
   const setSelectedNoteId = useUIStore((state) => state.setSelectedNoteId)
-  const loadDraft = useUIStore((state) => state.loadDraft)
+  const setIsEditing = useUIStore((state) => state.setIsEditing)
 
   const handleClick = () => {
     setSelectedNoteId(note.id)
-    loadDraft(note.title, note.content, note.tags)
+    setIsEditing(false) // Always open in view mode
   }
 
   return (

@@ -157,4 +157,139 @@
   .prose-code {
     @apply rounded bg-(--color-muted) px-1.5 py-0.5 font-mono text-sm;
   }
+
+  /* Note Viewer prose styling */
+  .note-viewer-content h1 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .note-viewer-content h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    margin-top: 1.25rem;
+  }
+
+  .note-viewer-content h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .note-viewer-content p {
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .note-viewer-content ul,
+  .note-viewer-content ol {
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+    padding-left: 1.5rem;
+  }
+
+  .note-viewer-content ul {
+    list-style-type: disc;
+  }
+
+  .note-viewer-content ol {
+    list-style-type: decimal;
+  }
+
+  .note-viewer-content li {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .note-viewer-content blockquote {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-left-width: 4px;
+    border-color: var(--color-border);
+    padding-left: 1rem;
+    font-style: italic;
+    color: var(--color-muted-foreground);
+  }
+
+  .note-viewer-content code {
+    border-radius: 0.25rem;
+    background-color: var(--color-muted);
+    padding: 0.125rem 0.375rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.875rem;
+  }
+
+  .note-viewer-content pre {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    overflow-x: auto;
+    border-radius: 0.375rem;
+    background-color: var(--color-muted);
+    padding: 1rem;
+  }
+
+  .note-viewer-content pre code {
+    background-color: transparent;
+    padding: 0;
+  }
+
+  .note-viewer-content hr {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-top-width: 2px;
+    border-color: var(--color-border);
+  }
+
+  .note-viewer-content img {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    max-width: 100%;
+    border-radius: 0.375rem;
+  }
+
+  .note-viewer-content a {
+    color: #2563eb;
+    text-decoration: underline;
+  }
+
+  .note-viewer-content a:hover {
+    color: #1e40af;
+  }
+
+  .note-viewer-content table {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .note-viewer-content table td,
+  .note-viewer-content table th {
+    border-width: 1px;
+    border-color: var(--color-border);
+    padding: 0.5rem 0.75rem;
+  }
+
+  .note-viewer-content table th {
+    background-color: var(--color-muted);
+    font-weight: 700;
+    text-align: left;
+  }
+
+  .note-viewer-content table tr:hover {
+    background-color: var(--color-muted);
+    opacity: 0.5;
+  }
+
+  .note-viewer-content > *:first-child {
+    margin-top: 0;
+  }
+
+  .note-viewer-content > *:last-child {
+    margin-bottom: 0;
+  }
 }

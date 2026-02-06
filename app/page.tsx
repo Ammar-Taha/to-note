@@ -11,6 +11,7 @@ import { TagsPanel } from '@/components/sidebar/TagsPanel'
 import { SearchInput } from '@/components/ui/SearchInput'
 import { NoteListItem } from '@/components/notes/NoteListItem'
 import { NoteEditor } from '@/components/notes/NoteEditor'
+import { NoteViewer } from '@/components/notes/NoteViewer'
 import { NoteEditorHeader } from '@/components/notes/NoteEditorHeader'
 import { useNotes } from '@/hooks/use-notes'
 import { useUIStore } from '@/lib/store/ui-store'
@@ -34,6 +35,8 @@ function NotesApp() {
   const searchQuery = useUIStore((state) => state.searchQuery)
   const selectedTags = useUIStore((state) => state.selectedTags)
   const clearDraft = useUIStore((state) => state.clearDraft)
+  const isEditing = useUIStore((state) => state.isEditing)
+  const setIsEditing = useUIStore((state) => state.setIsEditing)
 
   // Clear editor when switching views if selected note doesn't belong to current view
   useEffect(() => {
@@ -48,10 +51,11 @@ function NotesApp() {
         if (noteIsArchived !== viewingArchived) {
           setSelectedNoteId(null)
           clearDraft()
+          setIsEditing(false)
         }
       }
     }
-  }, [viewFilter, selectedNoteId, notes, setSelectedNoteId, clearDraft])
+  }, [viewFilter, selectedNoteId, notes, setSelectedNoteId, clearDraft, setIsEditing])
 
   // Filter notes based on view filter, search, and tags
   const filteredNotes = useMemo(() => {
@@ -86,6 +90,7 @@ function NotesApp() {
   const handleCreateNew = () => {
     setSelectedNoteId(null)
     clearDraft()
+    setIsEditing(true) // Set to editing mode when creating new note
   }
 
   return (
@@ -172,10 +177,17 @@ function NotesApp() {
 
           {/* Note Workspace */}
           <div className="flex flex-col">
-            {selectedNoteId !== null || !selectedNoteId ? (
+            {selectedNoteId !== null || isEditing ? (
               <>
                 {selectedNoteId && <NoteEditorHeader />}
-                <NoteEditor />
+                {/* Show viewer in view mode, editor in edit mode */}
+                {isEditing ? (
+                  <NoteEditor />
+                ) : selectedNoteId ? (
+                  <NoteViewer />
+                ) : (
+                  <NoteEditor />
+                )}
               </>
             ) : (
               <div className="flex flex-1 items-center justify-center">

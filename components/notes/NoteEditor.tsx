@@ -19,6 +19,8 @@ export function NoteEditor() {
   const setDraftTags = useUIStore((state) => state.setDraftTags)
   const clearDraft = useUIStore((state) => state.clearDraft)
   const setSelectedNoteId = useUIStore((state) => state.setSelectedNoteId)
+  const isEditing = useUIStore((state) => state.isEditing)
+  const setIsEditing = useUIStore((state) => state.setIsEditing)
 
   const [tagInputs, setTagInputs] = useState<string[]>([''])
   const [lastSaved, setLastSaved] = useState<Date | null>(null)
@@ -49,6 +51,8 @@ export function NoteEditor() {
           tags: draftTags,
         })
         setSelectedNoteId(newNote.id)
+        // After creating new note, switch to view mode
+        setIsEditing(false)
       } else {
         await updateNote.mutateAsync({
           id: selectedNoteId,
@@ -58,6 +62,8 @@ export function NoteEditor() {
             tags: draftTags,
           },
         })
+        // After updating existing note, switch to view mode
+        setIsEditing(false)
       }
       setLastSaved(new Date())
     } catch (error) {
@@ -67,8 +73,16 @@ export function NoteEditor() {
   }
 
   const handleCancel = () => {
-    clearDraft()
-    setSelectedNoteId(null)
+    if (isNewNote) {
+      // If it's a new note, close the editor entirely
+      clearDraft()
+      setSelectedNoteId(null)
+      setIsEditing(false)
+    } else {
+      // If editing existing note, return to view mode and discard changes
+      clearDraft()
+      setIsEditing(false)
+    }
     setTagInputs([''])
   }
 
@@ -200,7 +214,7 @@ export function NoteEditor() {
             onClick={handleCancel}
             className="border-[#cacfd8]"
           >
-            Cancel
+            {isNewNote ? 'Cancel' : 'Cancel Edit'}
           </Button>
           <Button
             onClick={handleSave}

@@ -5,11 +5,15 @@ import { Button } from '@/components/ui/button'
 import { useUIStore } from '@/lib/store/ui-store'
 import { useToggleArchive, useDeleteNote } from '@/hooks/use-notes'
 import { useNotes } from '@/hooks/use-notes'
+import { Pencil } from 'lucide-react'
 
 export function NoteEditorHeader() {
   const selectedNoteId = useUIStore((state) => state.selectedNoteId)
   const setSelectedNoteId = useUIStore((state) => state.setSelectedNoteId)
   const clearDraft = useUIStore((state) => state.clearDraft)
+  const isEditing = useUIStore((state) => state.isEditing)
+  const setIsEditing = useUIStore((state) => state.setIsEditing)
+  const loadDraft = useUIStore((state) => state.loadDraft)
   
   const { data: notes = [] } = useNotes()
   const selectedNote = notes.find((n) => n.id === selectedNoteId)
@@ -28,6 +32,7 @@ export function NoteEditorHeader() {
       // Clear editor pane after archiving
       setSelectedNoteId(null)
       clearDraft()
+      setIsEditing(false)
     } catch (error) {
       console.error('Failed to toggle archive:', error)
     }
@@ -41,9 +46,18 @@ export function NoteEditorHeader() {
       await deleteNote.mutateAsync(selectedNote.id)
       setSelectedNoteId(null)
       clearDraft()
+      setIsEditing(false)
     } catch (error) {
       console.error('Failed to delete note:', error)
     }
+  }
+
+  const handleEdit = () => {
+    if (!selectedNote) return
+    
+    // Load note data into draft
+    loadDraft(selectedNote.title, selectedNote.content, selectedNote.tags)
+    setIsEditing(true)
   }
 
   if (!selectedNote) return null
@@ -66,22 +80,35 @@ export function NoteEditorHeader() {
         </div>
         {selectedNote.is_archived ? 'Unarchive' : 'Archive'}
       </Button>
-      <Button
-        variant="outline"
-        onClick={handleDelete}
-        disabled={deleteNote.isPending}
-        className="gap-2 border-[#cacfd8] px-3 py-2 text-sm font-medium text-[#525866]"
-      >
-        <div className="relative size-4">
-          <Image
-            src="/icons/delete.svg"
-            alt="Delete"
-            fill
-            className="object-contain"
-          />
-        </div>
-        Delete
-      </Button>
+      
+      {/* Show Edit button in view mode, Delete button in edit mode */}
+      {!isEditing ? (
+        <Button
+          variant="outline"
+          onClick={handleEdit}
+          className="gap-2 border-[#cacfd8] px-3 py-2 text-sm font-medium"
+        >
+          <Pencil className="size-4" />
+          Edit
+        </Button>
+      ) : (
+        <Button
+          variant="outline"
+          onClick={handleDelete}
+          disabled={deleteNote.isPending}
+          className="gap-2 border-[#cacfd8] px-3 py-2 text-sm font-medium text-[#525866]"
+        >
+          <div className="relative size-4">
+            <Image
+              src="/icons/delete.svg"
+              alt="Delete"
+              fill
+              className="object-contain"
+            />
+          </div>
+          Delete
+        </Button>
+      )}
     </div>
   )
 }
